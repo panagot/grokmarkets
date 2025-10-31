@@ -22,7 +22,7 @@ GrokMarkets is a fully automated prediction market platform that operates entire
 ### 💰 **Solana-Powered Payments**
 - **HD Wallet System** - Unique deposit address per user
 - **Automatic payouts** - Winners paid instantly on resolution
-- **Low fees** - 1.5% total (0.5% creator, 1% treasury)
+- **Low fees** - 1% total (0.5% creator, 0.5% platform)
 - **Fast withdrawals** - Solana's speed (<30 seconds)
 
 ### 📱 **Twitter-Native Experience**
@@ -103,15 +103,16 @@ according to CoinGecko data
 ```
 User B (bet 2 SOL on YES): 
   Gross payout: 5.00 SOL
-  Fees: -0.075 SOL (1.5%)
-  Net: 4.925 SOL
-  Profit: 2.925 SOL (2.46x return!)
+  Fees: -0.05 SOL (1%)
+  Net: 4.95 SOL
+  Profit: 2.95 SOL (2.48x return!)
 
 User C (bet 3 SOL on NO):
   Lost their bet
 
 Creator (User A):
   Creator fee: 0.025 SOL (0.5% of pool)
+  Platform fee: 0.025 SOL (0.5% of pool)
 ```
 
 ### **8️⃣ Withdraw (Optional)**
@@ -242,8 +243,8 @@ no 2
 
 ### **Fee Structure**
 - **Creator Fee:** 0.5% (incentivizes market creation)
-- **Treasury Fee:** 1.0% (platform sustainability)
-- **Total Fees:** 1.5% (industry-leading low fees)
+- **Platform Fee:** 0.5% (platform sustainability)
+- **Total Fees:** 1% (industry-leading low fees)
 
 ### **Payout System**
 - **Proportional distribution** - Winners split pool based on bet size
@@ -362,7 +363,7 @@ no 2
 ## 💡 **Why GrokMarkets?**
 
 ### **vs. Polymarket:**
-- ✅ **Cheaper fees** - 1.5% vs 2-5%
+- ✅ **Cheaper fees** - 1% vs 2-5%
 - ✅ **Faster** - <10 min resolution vs hours/days
 - ✅ **Twitter-native** - No separate platform needed
 - ✅ **AI-powered** - Grok verifies outcomes
