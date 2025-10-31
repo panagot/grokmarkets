@@ -1,10 +1,12 @@
 # 🎯 GrokMarkets - AI-Powered Prediction Markets on Solana
 
+> **📝 Note:** This repository contains only public-facing documentation and frontend demos for security reasons. The full production system (backend, bot logic, smart contracts, and API integrations) remains private. You can interact with the live platform at [grokmarkets.com](https://grokmarkets.com) or [@solpredictbot](https://twitter.com/solpredictbot).
+
 ## 🚀 Overview
 
 GrokMarkets is a fully automated prediction market platform that operates entirely on Twitter, powered by Solana blockchain and Grok AI. Users create markets, place bets, and get paid automatically - all through simple tweets.
 
-**Live at:** [grokmarkets.com](https://grokmarkets.com)
+**Live at:** [grokmarkets.com](https://grokmarkets.com)  
 **Twitter Bot:** [@solpredictbot](https://twitter.com/solpredictbot)
 
 ---

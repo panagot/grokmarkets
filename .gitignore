@@ -1,0 +1,100 @@
+node_modules/
+
+# Environment and configuration files
+*.env
+*.env.local
+*.env.production
+config.env
+solpredictbot-config.env
+grokmarkets-config.env
+
+# Credentials and secrets
+*.txt
+!README.txt
+*credentials*
+*secret*
+*token*
+*password*
+*key*
+*mnemonic*
+
+# Bot and server code (production logic)
+soltwitterbot.js
+grokmarketstwitterbot.js
+twitter-bot.js
+local-bot.js
+server.js
+bch-campaign-api.js
+bch-campaign-tracker.js
+
+# Scripts with business logic
+*.js
+!frontend/*.js
+
+# Database and data files
+*.json
+!package*.json
+processed-tweets.json
+*database*
+*.sql
+
+# Internal documentation
+*.md
+!README.md
+
+# Credentials folders
+grokmarketsapi/
+flipstarter/
+New folder/
+groklogoai/
+
+# Screenshots and documents
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.zip
+deposit.png
+marketbet.png
+marketcreation.png
+quotetweet.png
+GrokMarkets_HTMLDeck.pdf
+docs.zip
+
+# Log files
+*.log
+twitter-bot.log
+twitter-credentials-test.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+test-*.js
+*test.js
+EXTREME_SECURITY_TESTS.js
+CHECK_CURRENT_MARKETS.js
+RESOLVE_EXPIRED_MARKETS.js
+CREATE_BEARS_JAGUARS_MARKET.js
+CREATE_BEARS_JAGUARS_MARKET_FIXED.js
+POST_COMING_SOON_TWEET.js
+PLACE_BETS_*.js
+
+# Internal docs
+important.md
+SECURITY_AUDIT_SUMMARY.md
+PRODUCTION_READY_SUMMARY.md
+GROKMARKETS_BOT_SETUP.md
+setup-bch-campaign.md
+TWEET_OPTIONS.md
+integrate-bch-campaign.js
+
+# Generated files
+RESOLUTION_TWEETS_READY_TO_POST.txt
