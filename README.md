@@ -5,7 +5,7 @@
 GrokMarkets is a fully automated prediction market platform that operates entirely on Twitter, powered by Solana blockchain and Grok AI. Users create markets, place bets, and get paid automatically - all through simple tweets.
 
 **Live at:** [grokmarkets.com](https://grokmarkets.com)
-**Twitter:** [@PANAGOT](https://twitter.com/PANAGOT)
+**Twitter Bot:** [@solpredictbot](https://twitter.com/solpredictbot)
 
 ---
 
@@ -41,7 +41,7 @@ GrokMarkets is a fully automated prediction market platform that operates entire
 
 ### **1️⃣ Create Market**
 ```
-User: @PANAGOT create Will Bitcoin reach $100K by December 2025?
+User: @solpredictbot create Will Bitcoin reach $100K by December 2025?
 Bot:  🚀 NEW PREDICTION MARKET LIVE!
       Market ID: GM-ABC123
       Ends: Dec 31, 2025
@@ -50,7 +50,7 @@ Bot:  🚀 NEW PREDICTION MARKET LIVE!
 
 ### **2️⃣ Deposit Funds**
 ```
-User: @PANAGOT deposit
+User: @solpredictbot deposit
 Bot:  💳 Your unique deposit address: 7xK9mP...
       Send SOL to this address
       Balance: 0.0000 SOL
@@ -114,7 +114,7 @@ Creator (User A):
 
 ### **8️⃣ Withdraw (Optional)**
 ```
-User B: @PANAGOT withdraw 4.9 [wallet_address]
+User B: @solpredictbot withdraw 4.9 [wallet_address]
 Bot:    ✅ Withdrawal of 4.9 SOL sent!
         Transaction: txn_hash...
 ```
@@ -127,17 +127,17 @@ Bot:    ✅ Withdrawal of 4.9 SOL sent!
 
 ### **Market Creation**
 ```
-@PANAGOT create "Will ETH reach $5K by Q1 2026?"
+@solpredictbot create "Will ETH reach $5K by Q1 2026?"
 ```
 
 ### **Deposit**
 ```
-@PANAGOT deposit
+@solpredictbot deposit
 ```
 
 ### **Check Balance**
 ```
-@PANAGOT balance
+@solpredictbot balance
 ```
 
 ### **Place Bet**
@@ -152,12 +152,12 @@ no 2
 
 ### **Withdraw**
 ```
-@PANAGOT withdraw 5 [your_solana_address]
+@solpredictbot withdraw 5 [your_solana_address]
 ```
 
 ### **Get Help**
 ```
-@PANAGOT help
+@solpredictbot help
 ```
 
 ---
@@ -166,25 +166,25 @@ no 2
 
 ### **Templates**
 ```
-@PANAGOT template crypto    - Crypto market templates
-@PANAGOT template stocks    - Stock market templates
-@PANAGOT template sports    - Sports betting templates
-@PANAGOT template politics  - Political predictions
+@solpredictbot template crypto    - Crypto market templates
+@solpredictbot template stocks    - Stock market templates
+@solpredictbot template sports    - Sports betting templates
+@solpredictbot template politics  - Political predictions
 ```
 
 ### **Social Features**
 ```
-@PANAGOT challenge @friend "Will Lakers win?" - Challenge friends
-@PANAGOT stats                                - Your betting stats
-@PANAGOT leaderboard                          - Top winners
-@PANAGOT trending                             - Popular markets
-@PANAGOT share [market_id]                    - Share markets
+@solpredictbot challenge @friend "Will Lakers win?" - Challenge friends
+@solpredictbot stats                                - Your betting stats
+@solpredictbot leaderboard                          - Top winners
+@solpredictbot trending                             - Popular markets
+@solpredictbot share [market_id]                    - Share markets
 ```
 
 ### **Alerts & Reminders**
 ```
-@PANAGOT alert [market_id]   - Get resolution notifications
-@PANAGOT reminder 24h        - Betting reminders
+@solpredictbot alert [market_id]   - Get resolution notifications
+@solpredictbot reminder 24h        - Betting reminders
 ```
 
 ---
@@ -252,13 +252,6 @@ no 2
   - You win: (1/3) × 8 = 2.67 SOL
   - Profit: 1.67 SOL (2.67x return!)
 
-### **Operating Costs**
-- **Grok API:** ~$0.0007 per market resolution
-- **Twitter API:** Included (Free tier: 1,500 tweets/month)
-- **Hosting:** ~$10-20/month
-- **Solana RPC:** Free (public endpoints)
-- **Total:** ~$15-25/month for 1000 markets
-
 ---
 
 ## 📊 **Platform Stats**
@@ -323,12 +316,12 @@ no 2
 
 1. **Create a market:**
    ```
-   @PANAGOT create Will Solana reach $500 by end of 2025?
+   @solpredictbot create Will Solana reach $500 by end of 2025?
    ```
 
 2. **Get deposit address:**
    ```
-   @PANAGOT deposit
+   @solpredictbot deposit
    ```
 
 3. **Send SOL to your address**
@@ -411,22 +404,6 @@ PORT=3000
 
 ---
 
-## 📚 **Documentation**
-
-### **Main Guides:**
-- `GROKMARKETS_COMPLETE_WORKFLOW.md` - Full workflow from creation to payout
-- `GROK_API_IMPLEMENTATION_PLAN.md` - Grok API integration details
-- `AUTOMATIC_GROK_RESOLUTION.md` - How automatic resolution works
-- `GROK_FALLBACK_SYSTEM.md` - What happens if Grok doesn't respond
-
-### **Setup Guides:**
-- `database_setup_mysql.md` - Database configuration
-- `LOCAL_BOTS_SETUP.md` - Local testing bots (CLI, Telegram)
-
-### **Progress Reports:**
-- `project_progress_2025_10_07.md` - Latest status update
-- `grokmarkets_diagnostic_guide.md` - API testing & diagnostics
-
 ---
 
 ## 🎊 **Production Status**
@@ -442,13 +419,6 @@ PORT=3000
 - Database persistence ✅
 - Withdrawal system ✅
 - Social features (challenges, stats, leaderboard) ✅
-
-### 🚧 **In Development**
-- Advanced analytics dashboard
-- Multi-market betting
-- Liquidity pools
-- Referral system
-- Mobile app
 
 ---
 
@@ -474,12 +444,7 @@ PORT=3000
 
 ---
 
-## 📊 **Platform Metrics**
-
-### **Cost Efficiency:**
-- **Resolution cost:** $0.0007 per market (Grok API)
-- **Monthly costs:** ~$15-25 for 1000 markets
-- **User fees:** 1.5% (industry-leading low)
+## 📊 **Platform Stats**
 
 ### **Performance:**
 - **Resolution success rate:** 99%+
@@ -550,106 +515,10 @@ PORT=3000
 
 ---
 
-## 🎯 **Smart Features**
-
-### **Smart Duration Detection**
-Bot automatically parses timeframes from questions:
-- "tomorrow" → 1 day
-- "next week" → 7 days
-- "December 2025" → End of December 2025
-- "Q1 2026" → March 31, 2026
-- "in 5 days" → 5 days from now
-
-### **Stock Symbol Enhancement**
-Bot auto-detects and adds symbols for Twitter price display:
-- "Bitcoin" → "Bitcoin ($BTC)"
-- "NVIDIA" → "NVIDIA ($NVDA)"
-- "Ethereum" → "Ethereum ($ETH)"
-
-### **HTML Entity Decoding**
-Bot handles special characters correctly:
-- `&amp;` → `&`
-- `&lt;` → `<`
-- Ensures clean display everywhere
-
----
-
-## 🔐 **Security**
-
-### **Wallet Security:**
-- Non-custodial (users control their funds)
-- HD wallet derivation (BIP44 standard)
-- Unique addresses per user (no reuse)
-- Private keys stored securely (env variables)
-
-### **API Security:**
-- Environment variable management
-- Rate limit protection
-- Input validation & sanitization
-- SQL prepared statements (no injection)
-
-### **User Protection:**
-- Balance verification before bets
-- Transaction confirmation
-- Automatic error handling
-- Detailed logging for audits
-
----
-
-## 🌟 **Roadmap**
-
-### **Phase 1: Launch** ✅ (COMPLETE)
-- [x] Core betting system
-- [x] Grok API integration
-- [x] Automatic resolutions
-- [x] Mobile-responsive frontend
-- [x] Database persistence
-
-### **Phase 2: Growth** (Next)
-- [ ] Marketing campaign
-- [ ] User referral system
-- [ ] Advanced analytics
-- [ ] Multi-currency support
-- [ ] Mobile app (iOS/Android)
-
-### **Phase 3: Scale** (Future)
-- [ ] Liquidity pools
-- [ ] Market maker integration
-- [ ] Whale protection mechanisms
-- [ ] API for third-party integrations
-- [ ] Institutional features
-
----
-
-## 💻 **Development**
-
-### **Run Locally:**
-```bash
-# Start backend
-node server.js
-
-# Start bot (in separate terminal)
-node twitter-bot.js
-
-# Run tests
-node testing-scripts/full-workflow-test.js
-```
-
-### **Test Grok API:**
-```bash
-node test-grok-api.js
-```
-
-### **Resolve Markets Manually:**
-```bash
-node resolve-stuck-markets.js
-```
-
----
 
 ## 📞 **Support**
 
-- **Twitter:** [@PANAGOT](https://twitter.com/PANAGOT)
+- **Twitter:** [@solpredictbot](https://twitter.com/solpredictbot)
 - **Website:** [grokmarkets.com](https://grokmarkets.com)
 - **Documentation:** See `/docs` folder
 - **Issues:** Create GitHub issue
@@ -670,21 +539,21 @@ Proprietary - All Rights Reserved
 - [Twitter API](https://developer.twitter.com) - Social layer
 - [Node.js](https://nodejs.org) - Runtime
 
-**Created by:** [@PANAGOT](https://twitter.com/PANAGOT)
+**Created by:** [@solpredictbot](https://twitter.com/solpredictbot)
 
 ---
 
 ## 🚀 **Quick Start Summary**
 
 ```
-1. Tweet: @PANAGOT create "Your prediction?"
-2. Tweet: @PANAGOT deposit
+1. Tweet: @solpredictbot create "Your prediction?"
+2. Tweet: @solpredictbot deposit
 3. Send SOL to your address
 4. Reply to market: "yes 1" or "no 2"
 5. Wait for market to expire
 6. Grok AI resolves automatically
 7. Get paid if you won!
-8. Withdraw anytime: @PANAGOT withdraw [amount] [address]
+8. Withdraw anytime: @solpredictbot withdraw [amount] [address]
 ```
 
 **That's it! Fully automated prediction markets in 8 simple steps!** 🎯
