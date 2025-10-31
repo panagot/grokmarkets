@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>How It Works: Three Simple Steps</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            color: white;
+        }
+        .step-container {
+            position: relative;
+        }
+        .step-container:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            width: 60px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        .step-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-top: 4px solid #FFB86B;
+            transition: transform 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        .icon-container {
+            background-color: #FFB86B;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .arrow {
+            color: rgba(255, 241, 230, 0.8);
+            font-size: 24px;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.flex{display:flex}.h-1{height:0.25rem}.h-64{height:16rem}.w-32{width:8rem}.w-64{width:16rem}.flex-1{flex:1 1 0%}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.gap-12{gap:3rem}.rounded-lg{border-radius:0.5rem}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.p-16{padding:4rem}.p-6{padding:1.5rem}.text-center{text-align:center}.text-right{text-align:right}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-5xl{font-size:3rem;line-height:1}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}</style></head>
+<body class="" style="">
+<div class="slide flex flex-col p-16" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-10">
+<h1 class="text-5xl font-bold mb-4">How It Works: Three Simple Steps</h1>
+<div class="w-32 h-1 bg-white"></div>
+</div>
+<!-- Main Content: Three Steps -->
+<div class="flex-1 flex items-center justify-center">
+<div class="flex gap-12 items-center">
+<!-- Step 1: Create/Join Market -->
+<div class="step-container">
+<div class="step-card w-64 h-64 rounded-lg flex flex-col items-center justify-center p-6">
+<div class="icon-container mb-4">
+<i class="fas fa-comment-dots text-3xl text-white"></i>
+</div>
+<h2 class="text-xl font-bold mb-2 text-center">1. Create &amp; Join Markets</h2>
+<p class="text-center text-sm">
+                            Tag @solpredictbot with commands to create markets or place bets
+                        </p>
+</div>
+<div class="arrow text-center mt-4">
+<i class="fas fa-chevron-right"></i>
+</div>
+</div>
+<!-- Step 2: Instant Confirmation -->
+<div class="step-container">
+<div class="step-card w-64 h-64 rounded-lg flex flex-col items-center justify-center p-6">
+<div class="icon-container mb-4">
+<i class="fas fa-check-circle text-3xl text-white"></i>
+</div>
+<h2 class="text-xl font-bold mb-2 text-center">2. Instant Confirmation</h2>
+<p class="text-center text-sm">
+                            Receive bot response with market details and confirmation
+                        </p>
+</div>
+<div class="arrow text-center mt-4">
+<i class="fas fa-chevron-right"></i>
+</div>
+</div>
+<!-- Step 3: Win Instant Payouts -->
+<div class="step-container">
+<div class="step-card w-64 h-64 rounded-lg flex flex-col items-center justify-center p-6" style="transform: translate(-2px, -32px); animation: unset; transition: unset;" data-sk-edited="">
+<div class="icon-container mb-4">
+<i class="fas fa-bolt text-3xl text-white"></i>
+</div>
+<h2 class="text-xl font-bold mb-2 text-center">3. Win Instant Payouts</h2>
+<p class="text-center text-sm">
+                            Winners receive automatic payouts on Solana blockchain
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-8 text-sm text-gray-300 text-right">
+<p>GrokMarkets: The Future of Prediction Markets</p>
+</div>
+</div>
+</body></html>

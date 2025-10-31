@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - GrokMarkets Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .content {
+            padding: 3rem 0;
+        }
+
+        .step {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .step h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip::before {
+            content: "💡 ";
+            font-size: 1.2rem;
+        }
+
+        .warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning::before {
+            content: "⚠️ ";
+            font-size: 1.2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-rocket"></i> Getting Started</h1>
+            <p>Your journey into AI-powered prediction markets begins here</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Documentation
+            </a>
+
+            <div class="toc">
+                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                <ul>
+                    <li><a href="#what-is-grokmarkets">What is GrokMarkets?</a></li>
+                    <li><a href="#connect-wallet">Connect Your Wallet</a></li>
+                    <li><a href="#create-market">Create Your First Market</a></li>
+                    <li><a href="#place-bet">Place Your First Bet</a></li>
+                    <li><a href="#twitter-integration">Twitter Integration</a></li>
+                    <li><a href="#next-steps">Next Steps</a></li>
+                </ul>
+            </div>
+
+            <div id="what-is-grokmarkets" class="step">
+                <div class="step-number">1</div>
+                <h3>
+                    <i class="fas fa-lightbulb"></i>
+                    What is GrokMarkets?
+                </h3>
+                <p>
+                    GrokMarkets is an AI-powered prediction market platform that operates entirely through Twitter. 
+                    All markets, bets, and interactions happen via Twitter commands with the @PANAGOT bot.
+                </p>
+                <p>
+                    <strong>Key Features:</strong>
+                </p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>🐦 Create markets by tweeting @PANAGOT create "question?"</li>
+                    <li>💰 Bet by replying "yes 1" or "no 2" to market tweets</li>
+                    <li>🤖 Automatic resolution by Grok AI</li>
+                    <li>📊 View live markets and data on GrokMarkets.com</li>
+                    <li>💸 Automatic payouts to your Twitter-linked Solana address</li>
+                </ul>
+            </div>
+
+            <div id="twitter-setup" class="step">
+                <div class="step-number">2</div>
+                <h3>
+                    <i class="fab fa-twitter"></i>
+                    Get Started on Twitter
+                </h3>
+                <p>
+                    GrokMarkets works entirely through Twitter! You don't need to connect any wallets or create accounts on the website.
+                </p>
+                
+                <div class="code-block">
+                    1. Follow @PANAGOT on Twitter
+                    2. Make sure your Twitter account is active
+                    3. Start creating markets and betting via tweets
+                    4. View live data on GrokMarkets.com
+                </div>
+
+                <div class="tip">
+                    <strong>Tip:</strong> Your first deposit will automatically create a Solana address linked to your Twitter handle.
+                </div>
+
+                <div class="warning">
+                    <strong>Important:</strong> All betting and market creation happens through Twitter replies and mentions. The website only shows data.
+                </div>
+            </div>
+
+            <div id="create-market" class="step">
+                <div class="step-number">3</div>
+                <h3>
+                    <i class="fas fa-plus-circle"></i>
+                    Create Your First Market
+                </h3>
+                <p>
+                    Creating a market is simple. Just tweet @PANAGOT with your prediction question:
+                </p>
+                
+                <div class="code-block">
+                    @PANAGOT create "Will Bitcoin reach $100K by December 2025?"
+                </div>
+                
+                <ol style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Tweet <span class="highlight">@PANAGOT create "Your question?"</span></li>
+                    <li>@PANAGOT will respond with market details</li>
+                    <li>Others can bet by replying to your tweet</li>
+                    <li>View live data on GrokMarkets.com</li>
+                </ol>
+
+                <p>
+                    <strong>Good market questions are:</strong>
+                </p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>✅ Specific and measurable</li>
+                    <li>✅ Have a clear deadline</li>
+                    <li>✅ Have a binary outcome (Yes/No)</li>
+                    <li>❌ Avoid subjective questions</li>
+                </ul>
+            </div>
+
+            <div id="place-bet" class="step">
+                <div class="step-number">4</div>
+                <h3>
+                    <i class="fas fa-chart-line"></i>
+                    Place Your First Bet
+                </h3>
+                <p>
+                    Betting is done entirely through Twitter replies. Here's how:
+                </p>
+                
+                <ol style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Find a market tweet from @PANAGOT</li>
+                    <li>Reply with <span class="highlight">"yes 1"</span> or <span class="highlight">"no 2"</span> (amount in SOL)</li>
+                    <li>@PANAGOT will process your bet</li>
+                    <li>View updated odds on GrokMarkets.com</li>
+                </ol>
+
+                <div class="code-block">
+                    Example: Betting 1.5 SOL on "YES" for Bitcoin $100K
+                    Reply: "yes 1.5"
+                    
+                    Current odds: 58.1% YES, 41.9% NO
+                    Potential payout: ~2.58 SOL if YES wins
+                </div>
+
+                <div class="tip">
+                    <strong>Pro Tip:</strong> Start with small bets to understand the platform before making larger wagers.
+                </div>
+            </div>
+
+            <div id="twitter-integration" class="step">
+                <div class="step-number">5</div>
+                <h3>
+                    <i class="fab fa-twitter"></i>
+                    Twitter Integration
+                </h3>
+                <p>
+                    All GrokMarkets interactions happen through Twitter commands with @PANAGOT:
+                </p>
+
+                <div class="code-block">
+                    Create Market: @PANAGOT create "Your prediction question?"
+                    Place Bet: Reply with "yes 1" or "no 2" (amount in SOL)
+                    Check Balance: @PANAGOT balance
+                    Withdraw: @PANAGOT withdraw 1 (amount in SOL)
+                    Deposit: Send SOL to your Twitter-linked address
+                </div>
+
+                <p>
+                    <strong>Complete Twitter Command List:</strong>
+                </p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li><span class="highlight">@PANAGOT create "question?"</span> - Create a new market</li>
+                    <li><span class="highlight">yes [amount]</span> - Bet YES on a market (reply to tweet)</li>
+                    <li><span class="highlight">no [amount]</span> - Bet NO on a market (reply to tweet)</li>
+                    <li><span class="highlight">@PANAGOT balance</span> - Check your SOL balance</li>
+                    <li><span class="highlight">@PANAGOT withdraw [amount]</span> - Withdraw SOL to your wallet</li>
+                </ul>
+            </div>
+
+            <div id="next-steps" class="step">
+                <div class="step-number">6</div>
+                <h3>
+                    <i class="fas fa-arrow-right"></i>
+                    Next Steps
+                </h3>
+                <p>
+                    Congratulations! You're now ready to start using GrokMarkets. Here's what you can do next:
+                </p>
+
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>🐦 Follow <a href="https://twitter.com/PANAGOT" target="_blank">@PANAGOT</a> and start creating markets</li>
+                    <li>📊 Browse live markets on <a href="../../frontend/index.html">GrokMarkets.com</a></li>
+                    <li>💬 Reply to market tweets to place your first bets</li>
+                    <li>📚 Read the <a href="faq.html">FAQ</a> for more details</li>
+                    <li>🤖 Watch Grok AI resolve markets automatically</li>
+                </ul>
+
+                <div class="tip">
+                    <strong>Ready to start?</strong> Go to Twitter and tweet <span class="highlight">@PANAGOT create "Your first prediction?"</span> to create your first market!
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

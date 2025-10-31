@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support - GrokMarkets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .content {
+            padding: 3rem 0;
+        }
+
+        .contact-method {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-method h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-method p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            color: #764ba2;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .response-time {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .response-time i {
+            color: var(--success-color);
+            font-size: 1.2rem;
+        }
+
+        .priority {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .priority-item {
+            flex: 1;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .priority-item h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .priority-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .priority-item.critical {
+            border-color: var(--error-color);
+        }
+
+        .priority-item.high {
+            border-color: var(--warning-color);
+        }
+
+        .priority-item.normal {
+            border-color: var(--info-color);
+        }
+
+        .form-section {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .status-indicator.online {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-indicator.away {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-life-ring"></i> Contact Support</h1>
+            <p>We're here to help you with any questions or issues</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Documentation
+            </a>
+
+            <div class="response-time">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <strong>Average Response Time:</strong> 2-4 hours<br>
+                    <small>We typically respond within 4 hours during business hours (9 AM - 6 PM PST)</small>
+                </div>
+            </div>
+
+            <div class="priority">
+                <div class="priority-item critical">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Critical</h4>
+                    <p>Security issues, lost funds, account compromised</p>
+                </div>
+                <div class="priority-item high">
+                    <h4><i class="fas fa-exclamation-circle"></i> High</h4>
+                    <p>Platform bugs, transaction failures, market issues</p>
+                </div>
+                <div class="priority-item normal">
+                    <h4><i class="fas fa-question-circle"></i> Normal</h4>
+                    <p>General questions, feature requests, feedback</p>
+                </div>
+            </div>
+
+            <div class="contact-method">
+                <h3>
+                    <i class="fas fa-envelope" style="color: var(--info-color);"></i>
+                    Email Support
+                </h3>
+                <p>For detailed issues, account problems, or when you need to share screenshots or logs.</p>
+                <div class="contact-info">
+                    <strong>General Support:</strong> <a href="mailto:support@grokmarkets.com">support@grokmarkets.com</a><br>
+                    <strong>Bug Reports:</strong> <a href="mailto:bugs@grokmarkets.com">bugs@grokmarkets.com</a><br>
+                    <strong>Security Issues:</strong> <a href="mailto:security@grokmarkets.com">security@grokmarkets.com</a>
+                </div>
+                <div class="status-indicator online">
+                    <i class="fas fa-circle"></i>
+                    Online - Responding within 2-4 hours
+                </div>
+            </div>
+
+            <div class="contact-method">
+                <h3>
+                    <i class="fab fa-discord" style="color: #5865f2;"></i>
+                    Discord Community
+                </h3>
+                <p>Join our Discord server for real-time chat, community discussions, and quick help.</p>
+                <div class="contact-info">
+                    <strong>Discord Server:</strong> <a href="https://discord.gg/grokmarkets" target="_blank">discord.gg/grokmarkets</a><br>
+                    <strong>Channels:</strong> #general, #support, #bug-reports, #feature-requests
+                </div>
+                <div class="status-indicator online">
+                    <i class="fas fa-circle"></i>
+                    Online - 24/7 community support
+                </div>
+            </div>
+
+            <div class="contact-method">
+                <h3>
+                    <i class="fab fa-twitter" style="color: #1da1f2;"></i>
+                    Twitter Support
+                </h3>
+                <p>Quick questions and updates. DM @PANAGOT for private support.</p>
+                <div class="contact-info">
+                    <strong>Twitter:</strong> <a href="https://twitter.com/PANAGOT" target="_blank">@PANAGOT</a><br>
+                    <strong>Direct Messages:</strong> Available for private support
+                </div>
+                <div class="status-indicator away">
+                    <i class="fas fa-circle"></i>
+                    Away - Check Discord for faster response
+                </div>
+            </div>
+
+            <div class="contact-method">
+                <h3>
+                    <i class="fab fa-telegram" style="color: #0088cc;"></i>
+                    Telegram
+                </h3>
+                <p>Join our Telegram group for announcements and community chat.</p>
+                <div class="contact-info">
+                    <strong>Telegram Group:</strong> <a href="https://t.me/grokmarkets" target="_blank">t.me/grokmarkets</a><br>
+                    <strong>Updates Channel:</strong> <a href="https://t.me/grokmarkets_news" target="_blank">@grokmarkets_news</a>
+                </div>
+                <div class="status-indicator online">
+                    <i class="fas fa-circle"></i>
+                    Online - Community support available
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3><i class="fas fa-paper-plane"></i> Send a Message</h3>
+                <p>Use this form for detailed support requests. We'll respond via email.</p>
+                
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="twitter">Twitter Handle (optional)</label>
+                        <input type="text" id="twitter" name="twitter" placeholder="@yourusername">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority">Priority Level *</label>
+                        <select id="priority" name="priority" required>
+                            <option value="">Select priority...</option>
+                            <option value="critical">Critical - Security/Funds Issue</option>
+                            <option value="high">High - Platform Bug/Transaction Issue</option>
+                            <option value="normal">Normal - General Question/Feature Request</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select category...</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="account">Account Problem</option>
+                            <option value="transaction">Transaction Issue</option>
+                            <option value="market">Market/Betting Question</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Brief description of your issue">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Please provide as much detail as possible..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 12px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Before Contacting Support</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Check our <a href="../resources/faq.html" style="color: #667eea;">FAQ</a> and <a href="../resources/getting-started.html" style="color: #667eea;">Getting Started guide</a> - you might find your answer there!
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="../resources/faq.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; color: var(--text-primary); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; border: 1px solid var(--border-color);">
+                        <i class="fas fa-question-circle"></i>
+                        View FAQ
+                    </a>
+                    <a href="../resources/getting-started.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary-gradient); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none;">
+                        <i class="fas fa-rocket"></i>
+                        Getting Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('supportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation and submission simulation
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to your backend
+            alert('Thank you for your message! We\'ll get back to you within 4 hours.');
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>

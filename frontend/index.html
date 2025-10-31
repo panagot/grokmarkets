@@ -1,0 +1,3006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BN0D37CK9Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BN0D37CK9Y');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrokMarkets - AI-Powered Twitter Prediction Markets</title>
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #000000 0%, #333333 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: rgba(255, 255, 255, 0.2);
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            box-sizing: border-box;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Clean white background with subtle pattern */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #ffffff;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Header - Compact */
+        .header {
+            position: relative;
+            z-index: 10;
+            padding: 2rem 0 1.5rem;
+            text-align: center;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% {
+                filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.3));
+            }
+            100% {
+                filter: drop-shadow(0 0 30px rgba(51, 51, 51, 0.4));
+            }
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+            animation: iconFloat 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .header-stat {
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .header-stat:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+        }
+
+        .header-stat-number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        .header-stat-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Cards */
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Market Cards */
+        .market-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .market-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+        }
+
+        .market-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        /* Market Creator */
+        .market-creator {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .creator-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+        }
+
+        .creator-info {
+            flex: 1;
+        }
+
+        .creator-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .creator-time {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .creator-time i {
+            margin-right: 0.25rem;
+        }
+
+        .market-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .market-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .status-resolved {
+            background: var(--warning-gradient);
+            color: white;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .market-stats-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e0 #f7fafc;
+        }
+        
+        .market-stats-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .market-stats-container::-webkit-scrollbar-track {
+            background: #f7fafc;
+            border-radius: 3px;
+        }
+        
+        .market-stats-container::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 3px;
+        }
+        
+        .market-stats-container::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+
+        /* Quick Actions Row */
+        .quick-actions-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .market-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: var(--text-primary);
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+        }
+
+        /* Wallet Section */
+        .wallet-section {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .wallet-info {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .wallet-address {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            word-break: break-all;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Enhanced Form Styles */
+        .market-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            position: relative;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group label::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #d1d5db;
+            border-radius: 2px;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 1.25rem 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 1rem;
+            background: #ffffff;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            color: white;
+            border: none;
+            padding: 1.25rem 2.5rem;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(55, 65, 81, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced How It Works Section */
+        .how-it-works {
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .steps-container {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-gradient);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .step-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .step-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+            position: relative;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .step-item:hover .step-number::after {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .step-content {
+            flex: 1;
+            min-width: 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .step-content h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .step-content p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Enhanced Create Market Section */
+        .create-market-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .create-market-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Markets Grid - Polymarket Style */
+        .markets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .markets-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Compact Stats in Markets Header */
+        .markets-stats {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .markets-header-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e0 #f7fafc;
+            padding-bottom: 0.5rem;
+        }
+        
+        .markets-header-row::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .markets-header-row::-webkit-scrollbar-track {
+            background: #f7fafc;
+            border-radius: 2px;
+        }
+        
+        .markets-header-row::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+        
+        .markets-header-row::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+
+        .market-stat {
+            text-align: center;
+            padding: 0.5rem 0.75rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .market-stat:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+
+        .market-stat-number {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #3b82f6;
+            line-height: 1;
+            margin-bottom: 0.15rem;
+        }
+
+        .market-stat-label {
+            font-size: 0.65rem;
+            color: #6b7280;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1;
+        }
+
+        /* Search & Filter Bar */
+        .search-filter-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.35rem 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            background: white;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Enhanced Odds Display */
+        .odds-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .odds-box {
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            min-width: 0;
+        }
+
+        .odds-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+        }
+
+        .odds-box:hover::before {
+            opacity: 0.2;
+        }
+
+        .odds-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .odds-box.yes {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .odds-box.yes::before {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .odds-box.no {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .odds-box.no::before {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .odds-percentage {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .odds-box.yes .odds-percentage {
+            color: #10b981;
+        }
+
+        .odds-box.no .odds-percentage {
+            color: #ef4444;
+        }
+
+        .odds-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .odds-box.yes .odds-label {
+            color: #059669;
+        }
+
+        .odds-box.no .odds-label {
+            color: #dc2626;
+        }
+
+        .odds-multiplier {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        .odds-bar {
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .odds-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .yes-fill {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .no-fill {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+
+        /* Grok AI Decision Status */
+        .grok-ai-decision {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .grok-ai-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .grok-ai-icon {
+            width: 24px;
+            height: 24px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px;
+        }
+
+        .grok-ai-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .grok-ai-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .grok-ai-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .grok-ai-status.pending {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #92400e;
+        }
+
+        .grok-ai-status.resolved {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #059669;
+        }
+
+        .grok-ai-pending i {
+            color: #f59e0b;
+        }
+
+        .grok-ai-outcome i {
+            color: #10b981;
+        }
+
+        .grok-ai-outcome strong {
+            color: var(--text-primary);
+        }
+
+        /* Twitter Activity Ticker */
+        .twitter-ticker-container {
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            height: 40px;
+            position: relative;
+        }
+
+        .twitter-ticker {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            animation: scroll-left 60s linear infinite;
+            height: 100%;
+        }
+
+        .twitter-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 1rem;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .ticker-user {
+            font-weight: 600;
+            color: #1da1f2;
+            font-size: 0.75rem;
+        }
+
+        .ticker-action {
+            color: var(--text-secondary);
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ticker-time {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .ticker-separator {
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            padding: 0 0.5rem;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Market Category Tags */
+        .market-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .market-category.crypto {
+            background: rgba(255, 193, 7, 0.2);
+            color: #d97706;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .market-category.sports {
+            background: rgba(16, 185, 129, 0.2);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .market-category.politics {
+            background: rgba(239, 68, 68, 0.2);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .market-category.tech {
+            background: rgba(59, 130, 246, 0.2);
+            color: #2563eb;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .market-category.general {
+            background: rgba(107, 114, 128, 0.2);
+            color: #4b5563;
+            border: 1px solid rgba(107, 114, 128, 0.3);
+        }
+
+        /* Enhanced Time Display */
+        .time-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .time-progress {
+            flex: 1;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .time-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #f59e0b 70%, #ef4444 100%);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .time-remaining {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .markets-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Make markets card more prominent */
+        #markets.card {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+        }
+
+        .refresh-btn {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status and Messages */
+        .status-message {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .status-info {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .status-loading {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Twitter Activity Feed */
+        .twitter-activity-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .twitter-activity-item:hover {
+            background: #e9ecef;
+            transform: translateX(4px);
+        }
+
+        .twitter-activity-item.market-created {
+            border-left-color: #10b981;
+        }
+
+        .twitter-activity-item.bet-placed {
+            border-left-color: #3b82f6;
+        }
+
+        .twitter-activity-item.market-resolved {
+            border-left-color: #f59e0b;
+        }
+
+        .twitter-activity-item.grok-resolution {
+            border-left-color: #8b5cf6;
+        }
+
+        .twitter-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .twitter-avatar.panagot {
+            background: var(--primary-gradient);
+        }
+
+        .twitter-avatar.user {
+            background: #10b981;
+        }
+
+        .twitter-avatar.grok {
+            background: #8b5cf6;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-top: 1px solid #e5e7eb;
+            margin-top: 4rem;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #ffffff;
+            border-radius: 50%;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-social a:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #667eea;
+        }
+
+        .footer-powered {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .header-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .header-stat {
+                padding: 0.5rem 1rem;
+            }
+            
+            .header-stat-number {
+                font-size: 1.25rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+                gap: 12px;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.25rem;
+            }
+            
+            .subtagline {
+                font-size: 1rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+            text-align: center;
+                gap: 1rem;
+            }
+            
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .markets-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .markets-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .markets-header-row {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.75rem;
+            }
+            
+            .markets-stats {
+                gap: 0.5rem;
+                justify-content: flex-start;
+                flex-shrink: 0;
+            }
+            
+            .market-stat {
+                padding: 0.2rem 0.4rem;
+                flex-shrink: 0;
+                min-width: 80px;
+            }
+            
+            .market-stat-number {
+                font-size: 0.9rem;
+            }
+            
+            .market-stat-label {
+                font-size: 0.6rem;
+            }
+            
+            .odds-display {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+            
+            .odds-box {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .odds-percentage {
+                font-size: 1.5rem;
+            }
+            
+            .odds-multiplier {
+                font-size: 0.7rem;
+            }
+            
+            .quick-actions-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .market-form {
+                gap: 1.5rem;
+            }
+            
+            .form-group input, .form-group textarea {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .submit-btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .section-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+            text-align: center;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-stats {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .header-stat {
+                padding: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .market-stats {
+                grid-template-columns: repeat(3, minmax(120px, 1fr));
+                min-width: 360px;
+            }
+            
+            .market-actions {
+                flex-direction: column;
+            }
+
+            .footer-legal {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <!-- Enhanced Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Official Grok AI Logo - Dark version -->
+                        <path d="M395.479 633.828L735.91 381.105C752.599 368.715 776.454 373.548 784.406 392.792C826.26 494.285 807.561 616.253 724.288 699.996C641.016 783.739 525.151 802.104 419.247 760.277L303.556 814.143C469.49 928.202 670.987 899.995 796.901 773.282C896.776 672.843 927.708 535.937 898.785 412.476L899.047 412.739C857.105 231.37 909.358 158.874 1016.4 10.6326C1018.93 7.11771 1021.47 3.60279 1024 0L883.144 141.651V141.212L395.392 633.916" fill="white"/>
+                        <path d="M325.226 695.251C206.128 580.84 226.662 403.776 328.285 301.668C403.431 226.097 526.549 195.254 634.026 240.596L749.454 186.994C728.657 171.88 702.007 155.623 671.424 144.2C533.19 86.9942 367.693 115.465 255.323 228.382C147.234 337.081 113.244 504.215 171.613 646.833C215.216 753.423 143.739 828.818 71.7385 904.916C46.2237 931.893 20.6216 958.87 0 987.429L325.139 695.339" fill="white"/>
+                    </svg>
+                </div>
+                <span>GrokMarkets</span>
+            </div>
+            <div class="tagline">AI-Powered Prediction Markets</div>
+            <div class="subtagline">
+                Create markets, place bets, and let Grok AI resolve outcomes automatically. 
+                The future of decentralized prediction markets is here.
+            </div>
+            
+        </div>
+
+        <!-- Twitter Activity Ticker -->
+        <div class="card" style="margin-bottom: 0.75rem; padding: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <h2 style="margin: 0; color: var(--text-primary); font-size: 1rem;">
+                    <i class="fab fa-twitter" style="color: #1da1f2;"></i>
+                    Live Twitter Activity
+                </h2>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.7rem;">
+                    <div class="loading-spinner" style="width: 10px; height: 10px;"></div>
+                    <span id="twitterActivityStatus">Live updates from @PANAGOT</span>
+                </div>
+            </div>
+            
+            <div class="twitter-ticker-container">
+                <div class="twitter-ticker" id="twitterTicker">
+                    <!-- Ticker items will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Markets List - Front and Center -->
+        <div id="markets" class="card">
+            <div class="markets-header">
+                <div class="markets-header-row">
+                    <!-- Compact Stats -->
+                    <div class="markets-stats">
+                        <div class="market-stat">
+                            <span class="market-stat-number">156</span>
+                            <span class="market-stat-label">Markets</span>
+                        </div>
+                        <div class="market-stat">
+                            <span class="market-stat-number">2.8K</span>
+                            <span class="market-stat-label">Bets</span>
+                        </div>
+                        <div class="market-stat">
+                            <span class="market-stat-number">1.2K</span>
+                            <span class="market-stat-label">SOL</span>
+                        </div>
+                        <div class="market-stat">
+                            <span class="market-stat-number">892</span>
+                            <span class="market-stat-label">Users</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; flex-shrink: 0;">
+                        <div style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.7rem; font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.2); white-space: nowrap;">
+                            <i class="fas fa-rocket" style="margin-right: 0.25rem;"></i>
+                            Pre-Launch Preview
+                        </div>
+                        <button id="refreshMarkets" class="refresh-btn" style="white-space: nowrap;">
+                            <i class="fas fa-sync-alt" id="refreshIcon"></i>
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search & Filter Bar -->
+            <div class="search-filter-bar">
+                <input type="text" id="marketSearch" class="search-input" placeholder="Search markets...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="crypto">Crypto</button>
+                    <button class="filter-btn" data-filter="sports">Sports</button>
+                    <button class="filter-btn" data-filter="politics">Politics</button>
+                    <button class="filter-btn" data-filter="tech">Tech</button>
+                    <button class="filter-btn" data-filter="ending-soon">Ending Soon</button>
+                    <button class="filter-btn" data-filter="trending">Trending</button>
+                </div>
+            </div>
+            <div id="marketsList" class="markets-grid">
+                <div class="empty-state">
+                    <div class="loading-spinner"></div>
+                    <h3>Loading markets...</h3>
+                    <p>Fetching live data from Twitter...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solana Pay Bet Section (for Twitter users) -->
+        <div id="solanaPaySection" class="card" style="display:none;">
+            <h2><i class="fas fa-mobile-alt"></i> Complete Your Bet</h2>
+            <div id="betSummary" class="status-message status-loading"></div>
+            <div id="solanaPayLinkContainer" style="margin: 20px 0;"></div>
+            <div id="qrCodeContainer" style="text-align:center;"></div>
+            <p style="margin-top:20px; color:var(--text-secondary);">
+                <i class="fas fa-qrcode"></i> Scan the QR code with your mobile wallet, or click the button above to pay from your desktop wallet.
+            </p>
+        </div>
+
+        <!-- Quick Actions Row -->
+        <div class="quick-actions-row">
+        <!-- Enhanced Create Market Form -->
+            <div id="create" class="card create-market-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-plus-circle"></i>
+            </div>
+                    <div>
+                        <h2 class="section-title">Create Market</h2>
+                        <p class="section-description">Create a prediction market that will be shared on Twitter. Grok AI will automatically resolve the outcome.</p>
+        </div>
+                </div>
+            <form id="marketForm" class="market-form">
+                <div class="form-group">
+                        <label for="question">Prediction Question:</label>
+                    <textarea id="question" placeholder="e.g., Will SOL hit $200 by December 1st?" required></textarea>
+                </div>
+                <div class="form-group">
+                        <label for="endTime">Market End Date:</label>
+                    <input type="datetime-local" id="endTime" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-rocket"></i>
+                        Create & Share on Twitter
+                    </button>
+            </form>
+        </div>
+
+            <!-- Enhanced How It Works -->
+        <div id="how-it-works" class="card how-it-works">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div>
+                        <h2 class="section-title">How It Works</h2>
+                        <p class="section-description">Four simple steps to start betting on the future</p>
+                    </div>
+                </div>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Tweet to Create</h4>
+                            <p>Tweet @PANAGOT create "Your prediction?" to start a market</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Others Bet</h4>
+                            <p>Users reply with "yes 1" or "no 2" to place bets</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Grok AI Resolves</h4>
+                            <p>Grok AI automatically determines the outcome</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Auto Payout</h4>
+                            <p>Winners receive automatic payouts to their wallets</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+
+        
+        <!-- Enhanced Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <!-- About Section -->
+                    <div class="footer-section">
+                        <h3>
+                            <div class="logo-icon" style="width: 36px; height: 36px; font-size: 1rem;">
+                                <svg width="20" height="20" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Official Grok AI Logo - Dark version -->
+                                    <path d="M395.479 633.828L735.91 381.105C752.599 368.715 776.454 373.548 784.406 392.792C826.26 494.285 807.561 616.253 724.288 699.996C641.016 783.739 525.151 802.104 419.247 760.277L303.556 814.143C469.49 928.202 670.987 899.995 796.901 773.282C896.776 672.843 927.708 535.937 898.785 412.476L899.047 412.739C857.105 231.37 909.358 158.874 1016.4 10.6326C1018.93 7.11771 1021.47 3.60279 1024 0L883.144 141.651V141.212L395.392 633.916" fill="white"/>
+                                    <path d="M325.226 695.251C206.128 580.84 226.662 403.776 328.285 301.668C403.431 226.097 526.549 195.254 634.026 240.596L749.454 186.994C728.657 171.88 702.007 155.623 671.424 144.2C533.19 86.9942 367.693 115.465 255.323 228.382C147.234 337.081 113.244 504.215 171.613 646.833C215.216 753.423 143.739 828.818 71.7385 904.916C46.2237 931.893 20.6216 958.87 0 987.429L325.139 695.339" fill="white"/>
+                                </svg>
+                            </div>
+                            GrokMarkets
+                        </h3>
+                        <p>
+                            AI-powered prediction markets on Twitter. Create, bet, and resolve markets with Grok AI automation. 
+                            The future of decentralized prediction markets is here.
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://twitter.com/PANAGOT" target="_blank" title="Follow @PANAGOT on Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://github.com/grokmarkets" target="_blank" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://discord.gg/grokmarkets" target="_blank" title="Join Discord">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                            <a href="https://t.me/grokmarkets" target="_blank" title="Join Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Platform Section -->
+                    <div class="footer-section">
+                        <h3>
+                            <i class="fas fa-chart-line"></i>
+                            Platform
+                        </h3>
+                        <ul class="footer-links">
+                            <li><a href="#markets">Live Markets</a></li>
+                            <li><a href="#create">Create Market</a></li>
+                            <li><a href="#how-it-works">How It Works</a></li>
+                            <li><a href="/api/health">API Status</a></li>
+                            <li><a href="/api/stats">Platform Stats</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Resources Section -->
+                    <div class="footer-section">
+                        <h3>
+                            <i class="fas fa-book"></i>
+                            Resources
+                        </h3>
+                        <ul class="footer-links">
+                            <li><a href="../docs/index.html" target="_blank">Documentation</a></li>
+                            <li><a href="../docs/resources/getting-started.html" target="_blank">Getting Started</a></li>
+                            <li><a href="../docs/resources/api-reference.html" target="_blank">API Reference</a></li>
+                            <li><a href="../docs/resources/faq.html" target="_blank">FAQ</a></li>
+                            <li><a href="../docs/support/contact.html" target="_blank">Contact Support</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Support Section -->
+                    <div class="footer-section">
+                        <h3>
+                            <i class="fas fa-life-ring"></i>
+                            Support
+                        </h3>
+                        <ul class="footer-links">
+                            <li><a href="../docs/support/contact.html" target="_blank">Contact Us</a></li>
+                            <li><a href="../docs/resources/faq.html" target="_blank">Help Center</a></li>
+                            <li><a href="../docs/support/contact.html" target="_blank">Report Bug</a></li>
+                            <li><a href="../docs/support/contact.html" target="_blank">Request Feature</a></li>
+                            <li><a href="/api/health" target="_blank">System Status</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="footer-bottom-content">
+                        <div class="footer-legal">
+                            <a href="../docs/legal/privacy-policy.html" target="_blank">Privacy Policy</a>
+                            <a href="../docs/legal/terms-of-service.html" target="_blank">Terms of Service</a>
+                            <a href="../docs/legal/cookie-policy.html" target="_blank">Cookie Policy</a>
+                            <a href="../docs/legal/disclaimer.html" target="_blank">Disclaimer</a>
+                        </div>
+                        <div class="footer-powered">
+                            <span>Powered by</span>
+                            <i class="fab fa-solana" style="color: #14f195;"></i>
+                            <strong>Solana</strong>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.85rem;">
+                        © <script>document.write(new Date().getFullYear())</script> GrokMarkets. Built with ❤️ for the Solana ecosystem. All rights reserved.
+                    </p>
+                    <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 1rem; margin-top: 1.5rem; text-align: center;">
+                        <p style="margin: 0; font-size: 0.8rem; color: #92400e; font-weight: 500;">
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
+                            <strong>Demo Mode:</strong> This is a pre-launch preview. All data shown is for demonstration purposes. 
+                            Real betting will be available at launch.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script>
+        let wallet = null;
+        let markets = [];
+        let isLoadingMarkets = false;
+
+        // Initialize Solana connection
+        const connection = new solanaWeb3.Connection('https://api.devnet.solana.com', 'confirmed');
+
+
+        // Create market and redirect to Twitter
+        document.getElementById('marketForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const question = document.getElementById('question').value.trim();
+            const endTime = document.getElementById('endTime').value;
+            
+            if (!question || question.length < 10) {
+                showStatusMessage('Please enter a valid prediction question (at least 10 characters)', 'error');
+                    return;
+                }
+
+            if (!endTime) {
+                showStatusMessage('Please select a market end date', 'error');
+                return;
+            }
+
+            // Format the question as a proper Twitter bot command
+            const twitterCommand = `@PANAGOT create ${question}`;
+            
+            // Calculate days until end
+            const daysUntilEnd = Math.ceil((new Date(endTime) - new Date()) / (1000 * 60 * 60 * 24));
+            
+            // Create the full tweet text
+            const tweetText = `${twitterCommand}
+
+Ends in ${daysUntilEnd} days!
+
+#PANAGOT #PredictionMarket`;
+            
+            // URL encode the tweet text
+            const encodedTweet = encodeURIComponent(tweetText);
+            
+            // Create Twitter URL with pre-filled tweet
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedTweet}`;
+            
+            // Show confirmation message
+            showStatusMessage(`🚀 Opening Twitter to share your market!`, 'success');
+            
+            // Open Twitter in a new tab
+            window.open(twitterUrl, '_blank');
+            
+            // Reset form after a short delay
+            setTimeout(() => {
+                document.getElementById('marketForm').reset();
+                
+                // Set new default end time
+                const newDefaultEndTime = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+                document.getElementById('endTime').value = newDefaultEndTime.toISOString().slice(0, 16);
+            }, 1000);
+        });
+
+        // Check server health
+        async function checkServerHealth() {
+            try {
+                const response = await fetch('/api/health', { 
+                    method: 'GET',
+                    signal: AbortSignal.timeout(5000) // 5 second timeout
+                });
+                return response.ok;
+            } catch (error) {
+                console.error('[Frontend] 🏥 Health check failed:', error);
+                return false;
+            }
+        }
+
+        // Load markets with enhanced error handling
+        async function loadMarkets() {
+            const marketsList = document.getElementById('marketsList');
+            const refreshIcon = document.getElementById('refreshIcon');
+            
+            // Prevent multiple simultaneous loads
+            if (isLoadingMarkets) {
+                console.log('[Frontend] ⏳ Already loading markets, skipping...');
+                return;
+            }
+            
+            try {
+                isLoadingMarkets = true;
+                // Show loading state
+                refreshIcon.classList.add('fa-spin');
+                console.log('[Frontend] 🔍 Starting to load markets...');
+                
+                // First check if server is healthy
+                console.log('[Frontend] 🏥 Checking server health...');
+                const isHealthy = await checkServerHealth();
+                if (!isHealthy) {
+                    throw new Error('Server health check failed - server appears to be down');
+                }
+                
+                // Add timeout to prevent hanging
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+                
+                const response = await fetch('/api/markets', {
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                console.log('[Frontend] 📡 API response received:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                markets = await response.json();
+                console.log('[Frontend] 📊 Markets received:', markets.length);
+                console.log('[Frontend] 📊 Market data:', markets);
+                allMarkets = markets;
+                filteredMarkets = [...markets];
+                
+                // Force display markets immediately
+                displayMarkets();
+                
+                // Show success message briefly
+                showStatusMessage('Markets loaded successfully!', 'success');
+                
+            } catch (error) {
+                console.error('[Frontend] ❌ Error loading markets:', error);
+                console.error('[Frontend] 🔍 Error details:', {
+                    name: error.name,
+                    message: error.message,
+                    stack: error.stack
+                });
+                
+                if (error.name === 'AbortError') {
+                    console.error('[Frontend] ⏰ Request timed out after 10 seconds');
+                } else if (error.message.includes('Failed to fetch')) {
+                    console.error('[Frontend] 🌐 Network error - server might be down or unreachable');
+                } else if (error.message.includes('HTTP error')) {
+                    console.error('[Frontend] 🔗 Server returned an error response');
+                }
+                // Show demo markets when connection fails
+                const demoMarkets = [];
+                
+                allMarkets = demoMarkets;
+                filteredMarkets = [...demoMarkets];
+                marketsList.innerHTML = demoMarkets.map(market => createMarketCard(market)).join('') + `
+                    <div class="empty-state" style="grid-column: 1 / -1; margin-top: 2rem;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Connection Issue Detected</h3>
+                        <p>Unable to connect to the server. The markets above are examples of how live Twitter markets will appear.</p>
+                        <div style="margin-top: 1rem;">
+                            <button class="btn btn-primary" onclick="loadMarkets()" style="margin-right: 1rem;">
+                                <i class="fas fa-redo"></i>
+                                Retry Connection
+                            </button>
+                            <button class="btn btn-secondary" onclick="location.reload()">
+                                <i class="fas fa-refresh"></i>
+                                Refresh Page
+                            </button>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                            If this persists, the server might be temporarily unavailable.
+                        </p>
+                    </div>
+                `;
+                showStatusMessage('Server connection failed. Showing demo markets. Please try refreshing.', 'error');
+            } finally {
+                isLoadingMarkets = false;
+                refreshIcon.classList.remove('fa-spin');
+                console.log('[Frontend] 🔄 Loading state cleared');
+            }
+        }
+
+        // Load Twitter activity with real-time updates
+        async function loadTwitterActivity() {
+            const twitterTicker = document.getElementById('twitterTicker');
+            
+            try {
+                console.log('[Frontend] 🐦 Loading Twitter activity...');
+                
+                const response = await fetch('/api/twitter-activity');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('[Frontend] 📱 Twitter activity data:', data);
+                
+                if (data.success && data.activity) {
+                    // Clear existing content
+                    twitterTicker.innerHTML = '';
+                    
+                    // Render ticker items
+                    data.activity.forEach((item, index) => {
+                        const timeAgo = getTimeAgo(item.timestamp);
+                        
+                        // Create ticker item
+                        const tickerItem = document.createElement('div');
+                        tickerItem.className = 'ticker-item';
+                        tickerItem.innerHTML = `
+                            <span class="ticker-user">${item.user}</span>
+                            <span class="ticker-action">${item.action}</span>
+                            <span class="ticker-time">${timeAgo}</span>
+                        `;
+                        
+                        twitterTicker.appendChild(tickerItem);
+                        
+                        // Add separator between items (except for last item)
+                        if (index < data.activity.length - 1) {
+                            const separator = document.createElement('div');
+                            separator.className = 'ticker-separator';
+                            separator.textContent = '•';
+                            twitterTicker.appendChild(separator);
+                        }
+                    });
+                    
+                    console.log('[Frontend] ✅ Twitter activity ticker loaded successfully');
+                    
+                    // Update status indicator
+                    const statusElement = document.getElementById('twitterActivityStatus');
+                    if (data.realDataCount > 0) {
+                        statusElement.innerHTML = `Live data (${data.realDataCount} real, ${data.demoDataCount} demo)`;
+                        statusElement.style.color = '#10b981'; // Green for real data
+                    } else {
+                        statusElement.innerHTML = `Demo data (${data.demoDataCount} items)`;
+                        statusElement.style.color = '#f59e0b'; // Orange for demo data
+                    }
+                } else {
+                    throw new Error('Invalid response format');
+                }
+                
+            } catch (error) {
+                console.error('[Frontend] ❌ Error loading Twitter activity:', error);
+                // Keep the existing demo content if API fails
+                console.log('[Frontend] 🔄 Keeping existing demo Twitter activity ticker');
+                
+                // Update status to show error
+                const statusElement = document.getElementById('twitterActivityStatus');
+                statusElement.innerHTML = 'Demo data (API unavailable)';
+                statusElement.style.color = '#ef4444'; // Red for error
+            }
+        }
+
+        // Helper function to format time ago
+        function getTimeAgo(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diffMs = now - time;
+            const diffMins = Math.floor(diffMs / (1000 * 60));
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            
+            if (diffMins < 1) return 'now';
+            if (diffMins < 60) return `${diffMins}m ago`;
+            if (diffHours < 24) return `${diffHours}h ago`;
+            return `${diffDays}d ago`;
+        }
+        
+        // Status message helper
+        function showStatusMessage(message, type = 'success') {
+            const existingMessage = document.querySelector('.status-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'info' ? 'info-circle' : 'exclamation-circle'}"></i>
+                ${message}
+            `;
+            
+            document.querySelector('.markets-header').appendChild(statusDiv);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                if (statusDiv.parentNode) {
+                    statusDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Create market card HTML with Twitter activity
+        function createMarketCard(market) {
+            const totalPool = (market.totalYesAmount || 0) + (market.totalNoAmount || 0);
+            
+            // For resolved markets, show 100% for winner, 0% for loser
+            let yesPercentage, noPercentage, yesPayout, noPayout;
+            if (market.resolved) {
+                if (market.outcome === true || market.outcome === 1) {
+                    // YES won
+                    yesPercentage = '100.0';
+                    noPercentage = '0.0';
+                    // Calculate actual payouts based on original pool distribution
+                    const actualYesPercentage = totalPool > 0 ? ((market.totalYesAmount || 0) / totalPool * 100) : 0;
+                    const actualNoPercentage = totalPool > 0 ? ((market.totalNoAmount || 0) / totalPool * 100) : 0;
+                    yesPayout = actualYesPercentage > 0 ? (100 / actualYesPercentage).toFixed(2) : '1.00';
+                    noPayout = actualNoPercentage > 0 ? (100 / actualNoPercentage).toFixed(2) : '∞';
+                } else {
+                    // NO won
+                    yesPercentage = '0.0';
+                    noPercentage = '100.0';
+                    // Calculate actual payouts based on original pool distribution
+                    const actualYesPercentage = totalPool > 0 ? ((market.totalYesAmount || 0) / totalPool * 100) : 0;
+                    const actualNoPercentage = totalPool > 0 ? ((market.totalNoAmount || 0) / totalPool * 100) : 0;
+                    yesPayout = actualYesPercentage > 0 ? (100 / actualYesPercentage).toFixed(2) : '∞';
+                    noPayout = actualNoPercentage > 0 ? (100 / actualNoPercentage).toFixed(2) : '1.00';
+                }
+            } else {
+                // For active markets, show actual betting percentages
+                yesPercentage = totalPool > 0 ? ((market.totalYesAmount || 0) / totalPool * 100).toFixed(1) : '0';
+                noPercentage = totalPool > 0 ? ((market.totalNoAmount || 0) / totalPool * 100).toFixed(1) : '0';
+                yesPayout = yesPercentage > 0 ? (100 / parseFloat(yesPercentage)).toFixed(2) : '∞';
+                noPayout = noPercentage > 0 ? (100 / parseFloat(noPercentage)).toFixed(2) : '∞';
+            }
+            const timeRemaining = formatTimeRemaining(market.endTime);
+            
+            // Twitter engagement data (mock for demo)
+            const twitterEngagement = {
+                likes: Math.floor(Math.random() * 500) + 50,
+                retweets: Math.floor(Math.random() * 100) + 10,
+                replies: Math.floor(Math.random() * 50) + 5,
+                views: Math.floor(Math.random() * 5000) + 500
+            };
+            
+            // Recent betting activity (mock for demo)
+            const recentBets = [
+                { user: 'crypto_trader', amount: 1.5, side: 'YES', time: '2m ago' },
+                { user: 'solana_whale', amount: 3.2, side: 'NO', time: '5m ago' },
+                { user: 'prediction_pro', amount: 0.8, side: 'YES', time: '8m ago' }
+            ];
+            
+            // Determine market category based on question content
+            const category = getMarketCategory(market.question);
+            const categoryIcon = getCategoryIcon(category);
+            
+            return `
+                <div class="market-card" data-category="${category}">
+                    <!-- Market Header -->
+                    <div class="market-header">
+                        <div class="market-category ${category}">
+                            <i class="${categoryIcon}"></i> ${category.toUpperCase()}
+                    </div>
+                        <div class="market-status status-${market.resolved ? 'resolved' : 'active'}">
+                            ${market.resolved ? '<i class="fas fa-check"></i> Resolved' : '<i class="fas fa-clock"></i> Active'}
+                        </div>
+                        </div>
+                    
+                    <!-- Creator Info -->
+                    <div class="market-creator">
+                        <div class="creator-avatar">
+                            ${(market.creator || 'U').charAt(0).toUpperCase()}
+                    </div>
+                        <div class="creator-info">
+                            <div class="creator-name">${(market.creator || 'unknown').startsWith('@') ? market.creator : '@' + market.creator}</div>
+                            <div class="creator-time">
+                                <i class="fas fa-clock"></i> ${market.createdAt ? new Date(market.createdAt).toLocaleString() : 'Just now'}
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Market Question -->
+                    <div class="market-question" style="display: flex; align-items: center; gap: 0.75rem;">
+                        ${(() => {
+                            const question = market.question.replace(/\$/g, '&#36;');
+                            let cryptoIcon = '';
+                            
+                            // Detect crypto mentions and add logos
+                            if (question.toLowerCase().includes('xrp') || question.toLowerCase().includes('ripple')) {
+                                cryptoIcon = '<div style="width: 32px; height: 32px; background: #23292f; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 0.8rem; flex-shrink: 0;">XRP</div>';
+                            } else if (question.toLowerCase().includes('bitcoin') || question.toLowerCase().includes('btc')) {
+                                cryptoIcon = '<div style="width: 32px; height: 32px; background: #f7931a; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;">₿</div>';
+                            } else if (question.toLowerCase().includes('ethereum') || question.toLowerCase().includes('eth')) {
+                                cryptoIcon = '<div style="width: 32px; height: 32px; background: #627eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;">Ξ</div>';
+                            } else if (question.toLowerCase().includes('solana') || question.toLowerCase().includes('sol')) {
+                                cryptoIcon = '<div style="width: 32px; height: 32px; background: linear-gradient(135deg, #9945ff 0%, #14f195 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;">◎</div>';
+                            } else if (question.toLowerCase().includes('bnb') || question.toLowerCase().includes('binance')) {
+                                cryptoIcon = '<div style="width: 32px; height: 32px; background: #f3ba2f; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;">BNB</div>';
+                            }
+                            
+                            return cryptoIcon + '<span>' + question + '</span>';
+                        })()}
+                    </div>
+                    
+                    <!-- Enhanced Time Display with Progress Bar -->
+                    <div class="time-display">
+                        <div class="time-progress">
+                            <div class="time-progress-bar" style="width: ${getTimeProgress(market.endTime, market.createdAt)}%"></div>
+                        </div>
+                        <div class="time-remaining">
+                            <i class="fas fa-clock"></i> ${timeRemaining}
+                            ${!market.createdAt ? '<span style="font-size: 0.7rem; color: #ef4444; margin-left: 0.5rem;" title="Estimated duration">⚠</span>' : ''}
+                        </div>
+                    </div>
+                    
+                    <!-- Twitter Engagement -->
+                    <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; padding: 0.75rem; background: #f8f9fa; border-radius: 8px; font-size: 0.85rem;">
+                        <div style="display: flex; align-items: center; gap: 0.25rem; color: var(--text-secondary);">
+                            <i class="fas fa-heart" style="color: #ef4444;"></i>
+                            ${twitterEngagement.likes}
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.25rem; color: var(--text-secondary);">
+                            <i class="fas fa-retweet" style="color: #10b981;"></i>
+                            ${twitterEngagement.retweets}
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.25rem; color: var(--text-secondary);">
+                            <i class="fas fa-comment" style="color: #3b82f6;"></i>
+                            ${twitterEngagement.replies}
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.25rem; color: var(--text-secondary);">
+                            <i class="fas fa-eye"></i>
+                            ${twitterEngagement.views.toLocaleString()}
+                        </div>
+                    </div>
+                    
+                    <!-- Grok AI Decision Status -->
+                    <div class="grok-ai-decision">
+                        <div class="grok-ai-header">
+                            <div class="grok-ai-icon">
+                                <svg width="16" height="16" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M395.479 633.828L735.91 381.105C752.599 368.715 776.454 373.548 784.406 392.792C826.26 494.285 807.561 616.253 724.288 699.996C641.016 783.739 525.151 802.104 419.247 760.277L303.556 814.143C469.49 928.202 670.987 899.995 796.901 773.282C896.776 672.843 927.708 535.937 898.785 412.476L899.047 412.739C857.105 231.37 909.358 158.874 1016.4 10.6326C1018.93 7.11771 1021.47 3.60279 1024 0L883.144 141.651V141.212L395.392 633.916" fill="#000000"/>
+                                    <path d="M325.226 695.251C206.128 580.84 226.662 403.776 328.285 301.668C403.431 226.097 526.549 195.254 634.026 240.596L749.454 186.994C728.657 171.88 702.007 155.623 671.424 144.2C533.19 86.9942 367.693 115.465 255.323 228.382C147.234 337.081 113.244 504.215 171.613 646.833C215.216 753.423 143.739 828.818 71.7385 904.916C46.2237 931.893 20.6216 958.87 0 987.429L325.139 695.339" fill="#000000"/>
+                                </svg>
+                            </div>
+                            <div class="grok-ai-title">Grok AI Decision</div>
+                        </div>
+                        <div class="grok-ai-status ${market.resolved ? 'resolved' : 'pending'}">
+                            ${market.resolved ? 
+                                `<div class="grok-ai-outcome">
+                                    <i class="fas fa-${(market.outcome === 'YES' || market.outcome === true || market.outcome === 1) ? 'check-circle' : 'times-circle'}"></i>
+                                    Grok AI said <strong>${(market.outcome === 'YES' || market.outcome === true || market.outcome === 1) ? 'YES' : 'NO'}</strong>
+                                </div>` :
+                                `<div class="grok-ai-pending">
+                                    <i class="fas fa-clock"></i>
+                                    Grok AI decision pending
+                                </div>`
+                            }
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Odds Display -->
+                    <div class="odds-display">
+                        <div class="odds-box yes" onclick="placeBet('${market.id}', true)">
+                            <div class="odds-label">
+                                <i class="fas fa-check-circle"></i> YES
+                            </div>
+                            <div class="odds-percentage">${yesPercentage}%</div>
+                            <div class="odds-multiplier">
+                                ${market.resolved ? 
+                                    (market.outcome === true || market.outcome === 1 ? 
+                                        `🏆 ${yesPayout}x payout` : 
+                                        `❌ 0x payout`
+                                    ) : 
+                                    (yesPercentage == 0 ? 'No bets yet' : yesPayout + 'x payout')
+                                }
+                            </div>
+                            <div class="odds-bar">
+                                <div class="odds-bar-fill yes-fill" style="width: ${yesPercentage}%"></div>
+                            </div>
+                        </div>
+                        <div class="odds-box no" onclick="placeBet('${market.id}', false)">
+                            <div class="odds-label">
+                                <i class="fas fa-times-circle"></i> NO
+                            </div>
+                            <div class="odds-percentage">${noPercentage}%</div>
+                            <div class="odds-multiplier">
+                                ${market.resolved ? 
+                                    (market.outcome === false || market.outcome === 0 ? 
+                                        `🏆 ${noPayout}x payout` : 
+                                        `❌ 0x payout`
+                                    ) : 
+                                    (noPercentage == 0 ? 'No bets yet' : noPayout + 'x payout')
+                                }
+                            </div>
+                            <div class="odds-bar">
+                                <div class="odds-bar-fill no-fill" style="width: ${noPercentage}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Market Stats (Simplified) -->
+                    <div class="market-stats-container">
+                        <div class="market-stats" style="grid-template-columns: repeat(3, minmax(120px, 1fr)); margin-bottom: 1rem; min-width: 360px;">
+                            <div class="stat-item">
+                                <div class="stat-value">${formatBalance(totalPool)}</div>
+                                <div class="stat-label">Total Volume</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #10b981;">
+                                    ${market.resolved ? 
+                                        (market.outcome === true || market.outcome === 1 ? 
+                                            `🏆 ${formatBalance(market.totalYesAmount || 0)}` : 
+                                            formatBalance(market.totalYesAmount || 0)
+                                        ) :
+                                        formatBalance(market.totalYesAmount || 0)
+                                    }
+                                </div>
+                            <div class="stat-label">YES Pool</div>
+                        </div>
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #ef4444;">
+                                    ${market.resolved ? 
+                                        (market.outcome === false || market.outcome === 0 ? 
+                                            `🏆 ${formatBalance(market.totalNoAmount || 0)}` : 
+                                            formatBalance(market.totalNoAmount || 0)
+                                        ) :
+                                        formatBalance(market.totalNoAmount || 0)
+                                    }
+                        </div>
+                            <div class="stat-label">NO Pool</div>
+                        </div>
+                    </div>
+                        </div>
+                    
+                    <!-- Payout Information for Resolved Markets -->
+                    ${market.resolved ? `
+                        <div style="margin: 1rem 0; padding: 1rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 12px; color: white;">
+                            <div style="font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-trophy"></i> Resolution Payout
+                        </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+                                <div>
+                                    <div style="font-weight: 500; margin-bottom: 0.25rem;">Winners</div>
+                                    <div style="color: #f0fdf4;">
+                                        ${market.outcome === true || market.outcome === 1 ? 
+                                            `YES bettors win ${formatBalance(totalPool)} SOL` : 
+                                            `NO bettors win ${formatBalance(totalPool)} SOL`
+                                        }
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500; margin-bottom: 0.25rem;">Losers</div>
+                                    <div style="color: #fef2f2;">
+                                        ${market.outcome === true || market.outcome === 1 ? 
+                                            `NO bettors lost ${formatBalance(market.totalNoAmount || 0)} SOL` : 
+                                            `YES bettors lost ${formatBalance(market.totalYesAmount || 0)} SOL`
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- Recent Betting Activity -->
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-weight: 600; margin-bottom: 0.75rem; color: var(--text-primary);">
+                            <i class="fas fa-chart-line"></i> Recent Bets
+                        </div>
+                        ${recentBets.map(bet => `
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.85rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <div style="width: 24px; height: 24px; background: ${bet.side === 'YES' ? 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)' : '#ef4444'}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.7rem; font-weight: bold;">
+                                        ${bet.side.charAt(0)}
+                        </div>
+                                    <span style="color: var(--text-primary);">${bet.user.startsWith('@') ? bet.user : '@' + bet.user}</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: ${bet.side === 'YES' ? '#10b981' : '#ef4444'}; font-weight: 600;">${bet.amount} SOL</span>
+                                    <span style="color: var(--text-secondary); font-size: 0.75rem;">${bet.time}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <!-- Market Actions -->
+                    ${market.resolved ? `
+                        <div class="stat-item" style="grid-column: 1 / -1; text-align: center; margin-top: 1rem;">
+                            <div style="
+                                background: ${(market.outcome === 'YES' || market.outcome === true || market.outcome === 1) ? 
+                                    'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 
+                                    'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'
+                                };
+                                color: white;
+                                padding: 0.75rem 1.5rem;
+                                border-radius: 25px;
+                                font-weight: 700;
+                                font-size: 1.1rem;
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 0.5rem;
+                                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                                margin-bottom: 0.5rem;
+                            ">
+                                <i class="fas fa-${(market.outcome === 'YES' || market.outcome === true || market.outcome === 1) ? 'check' : 'times'}"></i>
+                                ${(market.outcome === 'YES' || market.outcome === true || market.outcome === 1) ? 'YES' : 'NO'}
+                            </div>
+                            <div class="stat-label" style="font-weight: 600; font-size: 0.9rem;">FINAL RESULT</div>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- Twitter Integration Footer -->
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; font-size: 0.8rem; color: var(--text-secondary);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <i class="fas fa-twitter"></i> Live on Twitter • ID: ${market.id}
+                            </div>
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <a href="/market/${market.id}" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                    <i class="fas fa-eye"></i> View Details
+                                </a>
+                                ${(market.botReplyTweetId || market.bot_reply_tweet_id) ? `
+                                <button onclick="window.open('https://twitter.com/i/web/status/${market.botReplyTweetId || market.bot_reply_tweet_id}', '_blank')" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 0.8rem; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+                                    <i class="fas fa-external-link-alt"></i> View Tweet
+                                </button>
+                                <button onclick="navigator.clipboard.writeText('https://twitter.com/i/web/status/${market.botReplyTweetId || market.bot_reply_tweet_id}'); alert('Tweet link copied to clipboard!')" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 0.8rem; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                                ` : `
+                                <span style="color: var(--text-muted); font-size: 0.75rem;">
+                                    <i class="fas fa-info-circle"></i> Tweet link not available
+                                </span>
+                    `}
+                </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Display markets with enhanced UI
+        function displayMarkets() {
+            const marketsList = document.getElementById('marketsList');
+            
+            // Only show demo markets if we have no markets AND we're not in an error state
+            if (markets.length === 0 && !marketsList.innerHTML.includes('Connection Issue Detected')) {
+                // Show multiple demo markets when no real markets are available
+                const demoMarkets = [];
+                
+                allMarkets = demoMarkets;
+                filteredMarkets = [...demoMarkets];
+                marketsList.innerHTML = demoMarkets.map(market => createMarketCard(market)).join('') + `
+                    <div class="empty-state" style="grid-column: 1 / -1; margin-top: 2rem;">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Demo Markets Above</h3>
+                        <p>These are examples of how live Twitter markets will appear. Connect to see real markets!</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('create').scrollIntoView()">
+                            <i class="fas fa-plus"></i>
+                            Create Your First Market
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            marketsList.innerHTML = filteredMarkets.map(market => createMarketCard(market)).join('');
+            
+            // Log successful display
+            console.log(`[Frontend] ✅ Displayed ${filteredMarkets.length} markets`);
+        }
+
+        // Place bet with enhanced UX
+        async function placeBet(marketId, isYes) {
+            if (!wallet) {
+                showStatusMessage('Please connect your wallet first', 'error');
+                // Show wallet section if hidden
+                const walletSection = document.getElementById('walletSection');
+                if (walletSection) {
+                    walletSection.style.display = 'block';
+                    walletSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    document.getElementById('connectWallet').scrollIntoView({ behavior: 'smooth' });
+                }
+                return;
+            }
+
+            const amount = prompt(`Enter amount to bet on ${isYes ? 'YES' : 'NO'} (in SOL):`);
+            if (!amount || isNaN(amount) || amount <= 0) {
+                showStatusMessage('Please enter a valid amount', 'error');
+                return;
+            }
+
+            try {
+                showStatusMessage('Placing your bet...', 'loading');
+                
+                const response = await fetch('/api/bets', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        marketId,
+                        amount: parseFloat(amount),
+                        isYes,
+                        twitterHandle: wallet.toString()
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showStatusMessage(`Bet placed successfully! ${amount} SOL on ${isYes ? 'YES' : 'NO'}`, 'success');
+                    loadMarkets();
+                } else {
+                    showStatusMessage('Error placing bet: ' + result.error, 'error');
+                }
+            } catch (error) {
+                console.error('Error placing bet:', error);
+                showStatusMessage('Failed to place bet. Please try again.', 'error');
+            }
+        }
+        
+        // Utility functions
+        function formatBalance(balance) {
+            return parseFloat(balance || 0).toFixed(4);
+        }
+        
+        function formatTimeRemaining(endTime) {
+            const now = new Date();
+            const end = new Date(endTime);
+            const diffMs = end - now;
+            
+            if (diffMs <= 0) return 'Ended';
+            
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            if (days > 0) return `${days}d ${hours}h`;
+            if (hours > 0) return `${hours}h ${minutes}m`;
+            return `${minutes}m`;
+        }
+
+        // Helper functions for market categorization and display
+        function getMarketCategory(question) {
+            const q = question.toLowerCase();
+            if (q.includes('bitcoin') || q.includes('solana') || q.includes('crypto') || q.includes('token') || q.includes('coin') || q.includes('$')) {
+                return 'crypto';
+            } else if (q.includes('nba') || q.includes('nfl') || q.includes('soccer') || q.includes('football') || q.includes('basketball') || q.includes('championship') || q.includes('win')) {
+                return 'sports';
+            } else if (q.includes('election') || q.includes('president') || q.includes('politics') || q.includes('government') || q.includes('vote')) {
+                return 'politics';
+            } else if (q.includes('ai') || q.includes('tech') || q.includes('apple') || q.includes('google') || q.includes('tesla') || q.includes('spacex')) {
+                return 'tech';
+            }
+            return 'general';
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                crypto: 'fas fa-coins',
+                sports: 'fas fa-trophy',
+                politics: 'fas fa-vote-yea',
+                tech: 'fas fa-microchip',
+                general: 'fas fa-question-circle'
+            };
+            return icons[category] || icons.general;
+        }
+
+        function getTimeProgress(endTime, createdAt = null) {
+            const now = new Date();
+            const end = new Date(endTime);
+            
+            // If we have the actual creation date, use it
+            if (createdAt) {
+                const start = new Date(createdAt);
+                const total = end - start;
+                const elapsed = now - start;
+                const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
+                console.log(`[Progress] Market created: ${start.toISOString()}, ends: ${end.toISOString()}, progress: ${progress}%`);
+                return progress.toFixed(1);
+            }
+            
+            // Fallback: estimate creation date based on current time and end time
+            const daysUntilEnd = (end - now) / (1000 * 60 * 60 * 24);
+            let estimatedDuration;
+            
+            if (daysUntilEnd > 30) {
+                estimatedDuration = 30; // Long-term markets: 30 days
+            } else if (daysUntilEnd > 7) {
+                estimatedDuration = 14; // Medium-term markets: 14 days
+            } else {
+                estimatedDuration = 7; // Short-term markets: 7 days
+            }
+            
+            const start = new Date(endTime - (estimatedDuration * 24 * 60 * 60 * 1000));
+            const total = end - start;
+            const elapsed = now - start;
+            const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
+            console.log(`[Progress] Fallback - Days until end: ${daysUntilEnd.toFixed(1)}, estimated duration: ${estimatedDuration}, progress: ${progress}%`);
+            return progress.toFixed(1);
+        }
+
+        function isEndingSoon(endTime) {
+            const now = new Date();
+            const end = new Date(endTime);
+            const diffHours = (end - now) / (1000 * 60 * 60);
+            return diffHours <= 24 && diffHours > 0;
+        }
+
+        // Solana Pay integration for Twitter-linked bets
+        function getQueryParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        function showSolanaPaySection() {
+            const market = getQueryParam('market');
+            const amount = getQueryParam('amount');
+            const side = getQueryParam('side');
+            const reference = getQueryParam('reference');
+            const recipient = getQueryParam('recipient'); // Escrow address
+            if (market && amount && side && recipient) {
+                document.getElementById('solanaPaySection').style.display = 'block';
+                document.getElementById('betSummary').innerHTML = `
+                    <b>Market:</b> ${market}<br>
+                    <b>Bet:</b> ${side.toUpperCase()}<br>
+                    <b>Amount:</b> ${amount} SOL
+                `;
+                // Construct Solana Pay link
+                let solanaPayUrl = `solana:${recipient}?amount=${amount}`;
+                if (reference) solanaPayUrl += `&reference=${reference}`;
+                solanaPayUrl += `&label=Twitter Prediction Markets&message=Bet%20on%20${side.toUpperCase()}`;
+                // Show link
+                document.getElementById('solanaPayLinkContainer').innerHTML = `<a href="${solanaPayUrl}" class="connect-btn" style="display:inline-block;">Pay with Solana Wallet</a>`;
+                // Generate QR code
+                QRCode.toCanvas(document.createElement('canvas'), solanaPayUrl, { width: 180 }, function (err, canvas) {
+                    if (!err) {
+                        const qrDiv = document.getElementById('qrCodeContainer');
+                        qrDiv.innerHTML = '';
+                        qrDiv.appendChild(canvas);
+                    }
+                });
+            }
+        }
+        showSolanaPaySection();
+
+        // Add refresh functionality
+        document.getElementById('refreshMarkets').addEventListener('click', loadMarkets);
+        
+        // Search and filter functionality
+        let allMarkets = [];
+        let filteredMarkets = [];
+
+        // Search functionality
+        document.getElementById('marketSearch').addEventListener('input', function(e) {
+            filterMarkets();
+        });
+
+        // Filter button functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                filterMarkets();
+            });
+        });
+
+        function filterMarkets() {
+            const searchTerm = document.getElementById('marketSearch').value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            
+            filteredMarkets = allMarkets.filter(market => {
+                // Search filter
+                const matchesSearch = market.question.toLowerCase().includes(searchTerm) ||
+                                    (market.creator && market.creator.toLowerCase().includes(searchTerm));
+                
+                // Category/status filter
+                let matchesFilter = true;
+                if (activeFilter === 'all') {
+                    matchesFilter = true;
+                } else if (activeFilter === 'crypto' || activeFilter === 'sports' || activeFilter === 'politics' || activeFilter === 'tech') {
+                    matchesFilter = getMarketCategory(market.question) === activeFilter;
+                } else if (activeFilter === 'ending-soon') {
+                    matchesFilter = isEndingSoon(market.endTime);
+                } else if (activeFilter === 'trending') {
+                    // Simple trending logic - markets with high engagement
+                    const totalPool = (market.totalYesAmount || 0) + (market.totalNoAmount || 0);
+                    matchesFilter = totalPool > 5; // Arbitrary threshold
+                }
+                
+                return matchesSearch && matchesFilter;
+            });
+            
+            // Update display
+            displayFilteredMarkets();
+        }
+
+        function displayFilteredMarkets() {
+            const marketsList = document.getElementById('marketsList');
+            
+            if (filteredMarkets.length === 0) {
+                marketsList.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <h3>No markets found</h3>
+                        <p>Try adjusting your search or filter criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            marketsList.innerHTML = filteredMarkets.map(market => createMarketCard(market)).join('');
+        }
+        
+        // Auto-refresh markets and Twitter activity every 15 minutes (testing mode - reduced API usage)
+        setInterval(() => {
+        loadMarkets();
+            loadTwitterActivity();
+        }, 900000); // 15 minutes = 900,000ms
+
+        // Load markets on page load with retry logic
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Frontend] 🚀 DOM loaded, initializing...');
+            console.log('[Frontend] 🔍 Initial markets array length:', markets.length);
+            console.log('[Frontend] 🔍 Initial isLoadingMarkets state:', isLoadingMarkets);
+            
+            // Load markets and Twitter activity immediately
+            loadMarkets();
+            loadTwitterActivity();
+            
+            // Retry loading markets after 2 seconds if the first attempt fails
+            setTimeout(() => {
+                const marketsList = document.getElementById('marketsList');
+                if (!marketsList || marketsList.innerHTML.trim() === '' || 
+                    marketsList.innerHTML.includes('Demo Markets Above') || 
+                    marketsList.innerHTML.includes('Connection Issue Detected')) {
+                    console.log('[Frontend] 🔄 First load failed, retrying...');
+                    loadMarkets();
+                }
+            }, 2000);
+        });
+
+        // Set default end time to 7 days from now
+        const defaultEndTime = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        document.getElementById('endTime').value = defaultEndTime.toISOString().slice(0, 16);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Footer link functionality
+        document.querySelectorAll('.footer-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+                // External links will open in new tab as expected
+            });
+        });
+    </script>
+</body>
+</html> 

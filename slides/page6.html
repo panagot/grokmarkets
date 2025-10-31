@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Market Opportunity: $100B+ By 2027</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            color: white;
+        }
+        .advantage-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-left: 4px solid #FFB86B;
+            transition: transform 0.3s ease;
+        }
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+        .icon-container {
+            background-color: #FFB86B;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .axis path,
+        .axis line {
+            stroke: rgba(255, 255, 255, 0.5);
+        }
+        .axis text {
+            fill: rgba(255, 255, 255, 0.8);
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide flex flex-col p-16" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-8">
+<h1 class="text-5xl font-bold mb-4">Market Opportunity: $100B+ By 2027</h1>
+<div class="w-32 h-1 bg-white"></div>
+</div>
+<!-- Main Content -->
+<div class="flex flex-1">
+<!-- Left Side: Chart -->
+<div class="w-1/2 pr-8">
+<div class="w-full h-80" id="chart"></div>
+<div class="text-center mt-4">
+<p class="text-xl font-semibold">Prediction Market Growth Projection</p>
+</div>
+</div>
+<!-- Right Side: Strategic Advantages -->
+<div class="w-1/2 pl-8 flex flex-col justify-center">
+<div class="space-y-6">
+<!-- Advantage 1 -->
+<div class="advantage-card p-4 rounded-lg flex items-center">
+<div class="icon-container mr-4">
+<i class="fas fa-chart-line text-xl text-white"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold">Market Growth</h3>
+<p class="text-base">From $68B in 2024 to $100B+ by 2027</p>
+</div>
+</div>
+<!-- Advantage 2 -->
+<div class="advantage-card p-4 rounded-lg flex items-center">
+<div class="icon-container mr-4">
+<i class="fas fa-bolt text-xl text-white"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold">Solana Speed</h3>
+<p class="text-base">50,000 TPS instant settlement</p>
+</div>
+</div>
+<!-- Advantage 3 -->
+<div class="advantage-card p-4 rounded-lg flex items-center">
+<div class="icon-container mr-4">
+<i class="fas fa-users text-xl text-white"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold">Twitter Ecosystem</h3>
+<p class="text-base">500M+ users for viral adoption</p>
+</div>
+</div>
+<!-- Advantage 4 -->
+<div class="advantage-card p-4 rounded-lg flex items-center">
+<div class="icon-container mr-4">
+<i class="fas fa-robot text-xl text-white"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold">Grok AI</h3>
+<p class="text-base">10x engagement over traditional platforms</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-8 text-sm text-gray-300 text-right">
+<p>GrokMarkets: The Future of Prediction Markets</p>
+</div>
+</div>
+<script>
+        // Data for the chart
+        const data = [
+            { year: 2024, value: 68 },
+            { year: 2027, value: 100 }
+        ];
+        
+        // Set up the chart dimensions
+        const margin = { top: 20, right: 30, bottom: 40, left: 50 };
+        const width = 500 - margin.left - margin.right;
+        const height = 300 - margin.top - margin.bottom;
+        
+        // Create the SVG container
+        const svg = d3.select("#chart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+        
+        // Set up scales
+        const x = d3.scaleLinear()
+            .domain([2024, 2027])
+            .range([0, width]);
+        
+        const y = d3.scaleLinear()
+            .domain([0, 110])
+            .range([height, 0]);
+        
+        // Add X axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(2).tickFormat(d3.format("d")));
+        
+        // Add Y axis
+        svg.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y).ticks(5));
+        
+        // Add Y axis label
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .style("fill", "white")
+            .text("Billions USD");
+        
+        // Add the line
+        svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#9945FF")
+            .attr("stroke-width", 3)
+            .attr("d", d3.line()
+                .x(d => x(d.year))
+                .y(d => y(d.value))
+            );
+        
+        // Add the points
+        svg.selectAll("circle")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", d => x(d.year))
+            .attr("cy", d => y(d.value))
+            .attr("r", 6)
+            .attr("fill", "#9945FF");
+        
+        // Add labels to the points
+        svg.selectAll("text.point-label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "point-label")
+            .attr("x", d => x(d.year))
+            .attr("y", d => y(d.value) - 15)
+            .attr("text-anchor", "middle")
+            .style("fill", "white")
+            .style("font-weight", "bold")
+            .text(d => `$${d.value}B`);
+        
+        // Add area under the line
+        svg.append("path")
+            .datum(data)
+            .attr("fill", "url(#gradient)")
+            .attr("opacity", 0.3)
+            .attr("d", d3.area()
+                .x(d => x(d.year))
+                .y0(height)
+                .y1(d => y(d.value))
+            );
+        
+        // Create gradient
+        const gradient = svg.append("defs")
+            .append("linearGradient")
+            .attr("id", "gradient")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "0%")
+            .attr("y2", "100%");
+        
+        gradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "#9945FF");
+        
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "#4338ca");
+    </script>
+</body></html>

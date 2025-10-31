@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrokMarkets Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 4rem 0;
+        }
+
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .doc-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .doc-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .doc-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .doc-card .meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-book"></i> GrokMarkets Documentation</h1>
+            <p>Everything you need to know about AI-powered prediction markets</p>
+            <p style="margin-top: 1rem; opacity: 0.9; font-size: 0.95rem;">
+                ⚡ Now with Grok API: 99% reliable, instant resolutions!
+            </p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <a href="../frontend/index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to GrokMarkets
+            </a>
+
+            <div class="docs-grid">
+                <!-- Getting Started -->
+                <a href="resources/getting-started.html" class="doc-card">
+                    <h3>
+                        <i class="fas fa-rocket" style="color: #10b981;"></i>
+                        Getting Started
+                    </h3>
+                    <p>Learn how to create prediction markets and bet using Twitter commands with @PANAGOT.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>5 min read</span>
+                    </div>
+                </a>
+
+                <!-- API Reference -->
+                <a href="resources/api-reference.html" class="doc-card">
+                    <h3>
+                        <i class="fas fa-code" style="color: #3b82f6;"></i>
+                        API Reference
+                    </h3>
+                    <p>Complete API documentation with endpoints, parameters, and examples for developers.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>15 min read</span>
+                    </div>
+                </a>
+
+                <!-- User Guides -->
+                <a href="resources/user-guides.html" class="doc-card">
+                    <h3>
+                        <i class="fas fa-user-graduate" style="color: #8b5cf6;"></i>
+                        User Guides
+                    </h3>
+                    <p>Step-by-step tutorials for using Twitter commands, @PANAGOT interactions, and market participation.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>10 min read</span>
+                    </div>
+                </a>
+
+                <!-- Twitter Integration -->
+                <a href="resources/twitter-integration.html" class="doc-card">
+                    <h3>
+                        <i class="fab fa-twitter" style="color: #1da1f2;"></i>
+                        Twitter Integration
+                    </h3>
+                    <p>Complete guide to Twitter commands, @PANAGOT bot interactions, and Twitter-based betting.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>8 min read</span>
+                    </div>
+                </a>
+
+                <!-- Grok AI -->
+                <a href="resources/grok-ai.html" class="doc-card">
+                    <h3>
+                        <i class="fas fa-brain" style="color: #f59e0b;"></i>
+                        Grok AI Resolution
+                    </h3>
+                    <p>Understanding how Grok AI automatically resolves markets and makes predictions.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>7 min read</span>
+                    </div>
+                </a>
+
+                <!-- FAQ -->
+                <a href="resources/faq.html" class="doc-card">
+                    <h3>
+                        <i class="fas fa-question-circle" style="color: #ef4444;"></i>
+                        Frequently Asked Questions
+                    </h3>
+                    <p>Common questions about Twitter betting, @PANAGOT commands, and market participation.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>12 min read</span>
+                    </div>
+                </a>
+
+                <!-- Blog -->
+                <a href="resources/blog.html" class="doc-card">
+                    <h3>
+                        <i class="fas fa-newspaper" style="color: #06b6d4;"></i>
+                        Blog & Updates
+                    </h3>
+                    <p>Latest news, feature updates, market insights, and community highlights.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>Latest posts</span>
+                    </div>
+                </a>
+
+                <!-- Support -->
+                <a href="support/contact.html" class="doc-card">
+                    <h3>
+                        <i class="fas fa-life-ring" style="color: #14b8a6;"></i>
+                        Get Support
+                    </h3>
+                    <p>Contact our support team, report bugs, or request new features.</p>
+                    <div class="meta">
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 support</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

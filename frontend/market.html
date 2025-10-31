@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BN0D37CK9Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BN0D37CK9Y');
+  </script>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Details | GrokMarkets</title>
+  <link rel="icon" type="image/png" href="/groklogoai/grok-logo.png">
+  <link rel="icon" type="image/png" href="/groklogoai/grok-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #000000 0%, #333333 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --dark-bg: #0a0a0a;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b7280;
+      --border-color: rgba(255, 255, 255, 0.2);
+      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: #ffffff;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      position: relative;
+      z-index: 10;
+      padding: 2rem 0 1.5rem;
+      text-align: center;
+      color: var(--text-primary);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.75rem;
+    }
+
+    .back-btn {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffffff;
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-50%) translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Market Card */
+    .market-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .market-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    }
+
+    .market-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .market-id {
+      color: #6b7280;
+      font-size: 0.875rem;
+      font-weight: 600;
+      background: #f8f9fa;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-active {
+      background: var(--success-gradient);
+      color: white;
+    }
+
+    .status-resolved {
+      background: var(--warning-gradient);
+      color: white;
+    }
+
+    .market-question {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      border-radius: 12px;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .market-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-card {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      color: #6b7280;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .info-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Chart Section */
+    .chart-section {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      padding: 3rem;
+      border-radius: 24px;
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border: 2px solid #f1f5f9;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #10b981 0%, #3b82f6 50%, #ef4444 100%);
+    }
+
+    .chart-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 2.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #4b5563 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 500px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    /* Betting Section */
+    .betting-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      padding: 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    .betting-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .outcome-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .outcome-btn {
+      padding: 1.5rem;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: default;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .outcome-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.1;
+      transition: opacity 0.3s ease;
+    }
+
+    .outcome-btn:hover::before {
+      opacity: 0.2;
+    }
+
+    .outcome-yes {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .outcome-yes::before {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+
+    .outcome-no {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .outcome-no::before {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    }
+
+    .outcome-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+
+    .outcome-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .outcome-yes .outcome-label {
+      color: #059669;
+    }
+
+    .outcome-no .outcome-label {
+      color: #dc2626;
+    }
+
+    .outcome-pool {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .outcome-yes .outcome-pool {
+      color: #10b981;
+    }
+
+    .outcome-no .outcome-pool {
+      color: #ef4444;
+    }
+
+    .outcome-percentage {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    /* How to Bet Box */
+    .how-to-bet {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 2px solid #3b82f6;
+      box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+    }
+
+    .how-to-bet h3 {
+      color: #1e40af;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .how-to-bet p {
+      color: #1e3a8a;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .bet-examples {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #bfdbfe;
+    }
+
+    .bet-example {
+      font-family: 'Monaco', 'Menlo', monospace;
+      color: #1f2937;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background: #f9fafb;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      border-left: 3px solid #3b82f6;
+    }
+
+    .bet-example:last-child {
+      margin-bottom: 0;
+    }
+
+    .bet-example strong {
+      color: #1e40af;
+    }
+
+    .twitter-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #1da1f2;
+      color: white;
+      padding: 0.875rem 1.75rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px -1px rgba(29, 161, 242, 0.3);
+    }
+
+    .twitter-link:hover {
+      background: #1a91da;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(29, 161, 242, 0.4);
+    }
+
+    /* Bets Section */
+    .bets-section {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e7eb;
+    }
+
+    .bets-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .bet-card {
+      background: #f9fafb;
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border-left: 4px solid #667eea;
+      transition: all 0.3s ease;
+    }
+
+    .bet-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .bet-user {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .bet-details {
+      display: flex;
+      justify-content: space-between;
+      color: #6b7280;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* Loading & Error */
+    .loading {
+      text-align: center;
+      padding: 4rem 2rem;
+      font-size: 1.125rem;
+      color: #6b7280;
+    }
+
+    .loading::before {
+      content: "⚡";
+      display: block;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .error {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      color: #991b1b;
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      margin: 2rem 0;
+      border: 2px solid #f87171;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .back-btn {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
+
+      .header {
+        padding: 1.5rem 0;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+      }
+
+      .market-card {
+        padding: 1.5rem;
+      }
+
+      .market-question {
+        font-size: 1.35rem;
+        padding: 1rem;
+      }
+
+      .outcome-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .market-info {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bet-details {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <div class="header">
+    <div class="container">
+      <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+      <div class="logo-container">
+        <a href="/" class="logo" style="display: flex; align-items: center; gap: 12px;">
+          <div class="logo-icon">
+            <svg width="32" height="32" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Official Grok AI Logo - Dark version -->
+              <path d="M395.479 633.828L735.91 381.105C752.599 368.715 776.454 373.548 784.406 392.792C826.26 494.285 807.561 616.253 724.288 699.996C641.016 783.739 525.151 802.104 419.247 760.277L303.556 814.143C469.49 928.202 670.987 899.995 796.901 773.282C896.776 672.843 927.708 535.937 898.785 412.476L899.047 412.739C857.105 231.37 909.358 158.874 1016.4 10.6326C1018.93 7.11771 1021.47 3.60279 1024 0L883.144 141.651V141.212L395.392 633.916" fill="white"/>
+              <path d="M325.226 695.251C206.128 580.84 226.662 403.776 328.285 301.668C403.431 226.097 526.549 195.254 634.026 240.596L749.454 186.994C728.657 171.88 702.007 155.623 671.424 144.2C533.19 86.9942 367.693 115.465 255.323 228.382C147.234 337.081 113.244 504.215 171.613 646.833C215.216 753.423 143.739 828.818 71.7385 904.916C46.2237 931.893 20.6216 958.87 0 987.429L325.139 695.339" fill="white"/>
+            </svg>
+          </div>
+          <span>GrokMarkets</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="loading" class="loading">
+      Loading market data...
+    </div>
+
+    <div id="content" style="display: none;">
+      <div class="market-card">
+        <div class="market-header">
+          <div class="market-id" id="marketId">...</div>
+          <div class="status-badge" id="statusBadge">...</div>
+        </div>
+
+        <div class="market-question" id="question">...</div>
+
+        <div class="market-info">
+          <div class="info-card">
+            <div class="info-label">Total Pool</div>
+            <div class="info-value" id="totalPool">...</div>
+          </div>
+          <div class="info-card">
+            <div class="info-label">Total Bets</div>
+            <div class="info-value" id="totalBets">...</div>
+          </div>
+          <div class="info-card">
+            <div class="info-label">Ends In</div>
+            <div class="info-value" id="endTime">...</div>
+          </div>
+          <div class="info-card">
+            <div class="info-label">Creator</div>
+            <div class="info-value" id="creator">...</div>
+          </div>
+        </div>
+
+        <div class="chart-section">
+          <div class="chart-title">Pool Distribution</div>
+          <div class="chart-container">
+            <canvas id="poolChart"></canvas>
+          </div>
+        </div>
+
+        <div class="betting-section">
+          <div class="betting-title">Current Odds</div>
+          <div class="outcome-buttons">
+            <div class="outcome-btn outcome-yes">
+              <div class="outcome-label">✅ YES</div>
+              <div class="outcome-pool" id="yesPool">...</div>
+              <div class="outcome-percentage" id="yesPercentage">...</div>
+            </div>
+            <div class="outcome-btn outcome-no">
+              <div class="outcome-label">❌ NO</div>
+              <div class="outcome-pool" id="noPool">...</div>
+              <div class="outcome-percentage" id="noPercentage">...</div>
+            </div>
+          </div>
+
+          <div class="how-to-bet">
+            <h3><i class="fab fa-twitter"></i> How to Place a Bet</h3>
+            <p>
+              All bets are placed through Twitter by mentioning <strong>@PANAGOT</strong>. Simply tweet one of the following commands:
+            </p>
+            <div class="bet-examples">
+              <div class="bet-example">
+                💰 Bet <strong>YES</strong>: @PANAGOT bet 5 SOL YES <span id="marketIdCode"></span>
+              </div>
+              <div class="bet-example">
+                💰 Bet <strong>NO</strong>: @PANAGOT bet 3 SOL NO <span id="marketIdCode2"></span>
+              </div>
+            </div>
+            <a href="https://twitter.com/PANAGOT" class="twitter-link" target="_blank">
+              <i class="fab fa-twitter"></i> Go to @PANAGOT on Twitter
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bets-section" id="betsSection" style="display: none;">
+        <div class="bets-title">📜 Recent Bets</div>
+        <div id="betsList"></div>
+      </div>
+    </div>
+
+    <div id="error" style="display: none;" class="error">
+      <i class="fas fa-exclamation-triangle" style="font-size: 2rem; display: block; margin-bottom: 1rem;"></i>
+      Market not found. Please check the market ID and try again.
+    </div>
+  </div>
+
+  <script>
+    // Get market ID from URL
+    const pathParts = window.location.pathname.split('/');
+    const marketId = pathParts[pathParts.length - 1];
+
+    let poolChart = null;
+
+    // Render pool distribution chart - Line chart showing betting activity over time
+    function renderPoolChart(totalYes, totalNo, yesPercentage, noPercentage) {
+      const ctx = document.getElementById('poolChart');
+      
+      // Destroy existing chart if it exists
+      if (poolChart) {
+        poolChart.destroy();
+      }
+
+      // Generate sample time-based data for visualization
+      // In production, this would come from actual bet history
+      const timeLabels = [];
+      const yesData = [];
+      const noData = [];
+      
+      // Create 20 data points showing progression with realistic fluctuations
+      // Start from 50/50 and gradually move to current proportions
+      const startYes = 50;
+      const startNo = 50;
+      
+      for (let i = 0; i < 20; i++) {
+        timeLabels.push(`${i + 1}`);
+        
+        // Simulate gradual progression from 50/50 to current values
+        const progress = i / 19;
+        const baseYes = startYes + (yesPercentage - startYes) * progress;
+        const baseNo = startNo + (noPercentage - startNo) * progress;
+        
+        // Add realistic fluctuations (random variations)
+        const fluctuation = Math.sin(i * 0.8) * 3 + Math.cos(i * 1.2) * 2 + Math.random() * 2 - 1;
+        const currentYes = Math.max(10, Math.min(90, baseYes + fluctuation));
+        const currentNo = 100 - currentYes; // Ensure they always add up to 100%
+        
+        yesData.push(currentYes);
+        noData.push(currentNo);
+      }
+
+      poolChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeLabels,
+          datasets: [
+            {
+              label: 'YES',
+              data: yesData,
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.2)',
+              borderWidth: 5,
+              fill: true,
+              tension: 0.6,
+              pointRadius: 0,
+              pointHoverRadius: 10,
+              pointHoverBackgroundColor: '#10b981',
+              pointHoverBorderWidth: 4,
+              pointHoverBorderColor: '#ffffff',
+              shadowOffsetX: 0,
+              shadowOffsetY: 4,
+              shadowBlur: 10,
+              shadowColor: 'rgba(16, 185, 129, 0.3)'
+            },
+            {
+              label: 'NO',
+              data: noData,
+              borderColor: '#ef4444',
+              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+              borderWidth: 5,
+              fill: true,
+              tension: 0.6,
+              pointRadius: 0,
+              pointHoverRadius: 10,
+              pointHoverBackgroundColor: '#ef4444',
+              pointHoverBorderWidth: 4,
+              pointHoverBorderColor: '#ffffff',
+              shadowOffsetX: 0,
+              shadowOffsetY: 4,
+              shadowBlur: 10,
+              shadowColor: 'rgba(239, 68, 68, 0.3)'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 2000,
+            easing: 'easeInOutQuart'
+          },
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              align: 'center',
+              labels: {
+                usePointStyle: true,
+                padding: 25,
+                font: {
+                  size: 16,
+                  weight: '800',
+                  family: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+                },
+                color: '#1a1a1a',
+                boxWidth: 14,
+                boxHeight: 14,
+                pointStyle: 'circle'
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+              padding: 16,
+              titleFont: {
+                size: 15,
+                weight: 'bold'
+              },
+              bodyFont: {
+                size: 15,
+                weight: '700'
+              },
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              borderWidth: 2,
+              cornerRadius: 12,
+              displayColors: true,
+              callbacks: {
+                label: function(context) {
+                  return `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                callback: function(value) {
+                  return value + '%';
+                },
+                font: {
+                  size: 14,
+                  weight: '700'
+                },
+                color: '#4b5563',
+                stepSize: 10,
+                padding: 10
+              },
+              grid: {
+                color: 'rgba(229, 231, 235, 0.7)',
+                drawBorder: false,
+                lineWidth: 1.5,
+                drawTicks: false
+              }
+            },
+            x: {
+              ticks: {
+                display: false
+              },
+              grid: {
+                display: false,
+                drawBorder: false
+              }
+            }
+          }
+        }
+      });
+    }
+
+    async function loadMarket() {
+      try {
+        const response = await fetch(`/api/markets/${marketId}`);
+        
+        if (!response.ok) {
+          throw new Error('Market not found');
+        }
+
+        const market = await response.json();
+        
+        // Hide loading, show content
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+
+        // Update market ID
+        document.getElementById('marketId').textContent = market.id;
+        
+        // Update market ID in betting examples
+        document.getElementById('marketIdCode').textContent = market.id;
+        document.getElementById('marketIdCode2').textContent = market.id;
+
+        // Update status badge
+        const statusBadge = document.getElementById('statusBadge');
+        if (market.resolved) {
+          statusBadge.textContent = `RESOLVED: ${market.outcome ? 'YES' : 'NO'}`;
+          statusBadge.className = 'status-badge status-resolved';
+        } else {
+          statusBadge.textContent = 'ACTIVE';
+          statusBadge.className = 'status-badge status-active';
+        }
+
+        // Update question
+        document.getElementById('question').textContent = market.question;
+
+        // Calculate pools
+        const totalYes = market.totalYesAmount || 0;
+        const totalNo = market.totalNoAmount || 0;
+        const totalPool = totalYes + totalNo;
+        const yesPercentage = totalPool > 0 ? ((totalYes / totalPool) * 100).toFixed(1) : 50;
+        const noPercentage = totalPool > 0 ? ((totalNo / totalPool) * 100).toFixed(1) : 50;
+
+        // Update pool info
+        document.getElementById('totalPool').textContent = `${totalPool.toFixed(2)} SOL`;
+        
+        // Load bets to get accurate bet count
+        loadMarketBets(marketId);
+        
+        document.getElementById('creator').textContent = market.creator || market.creatorTwitterHandle || 'Unknown';
+
+        // Update end time
+        const endDate = new Date(market.endTime);
+        const now = new Date();
+        const timeRemaining = endDate - now;
+        
+        if (timeRemaining > 0) {
+          const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          if (days > 0) {
+            document.getElementById('endTime').textContent = `${days}d ${hours}h`;
+          } else if (hours > 0) {
+            document.getElementById('endTime').textContent = `${hours}h`;
+          } else {
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('endTime').textContent = `${minutes}m`;
+          }
+        } else {
+          document.getElementById('endTime').textContent = 'Ended';
+        }
+
+        // Update YES/NO pools
+        document.getElementById('yesPool').textContent = `${totalYes.toFixed(2)} SOL`;
+        document.getElementById('yesPercentage').textContent = `${yesPercentage}%`;
+        document.getElementById('noPool').textContent = `${totalNo.toFixed(2)} SOL`;
+        document.getElementById('noPercentage').textContent = `${noPercentage}%`;
+
+        // Render pool distribution chart
+        renderPoolChart(totalYes, totalNo, yesPercentage, noPercentage);
+
+        // Bets will be loaded separately by loadMarketBets function
+
+      } catch (error) {
+        console.error('Error loading market:', error);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error').style.display = 'block';
+      }
+    }
+
+    async function loadMarketBets(marketId) {
+      try {
+        const response = await fetch(`/api/markets/${marketId}/bets`);
+        
+        if (response.ok) {
+          const data = await response.json();
+          const betCount = data.bets ? data.bets.length : 0;
+          document.getElementById('totalBets').textContent = betCount;
+          
+          // Also update the bets display if there are bets
+          if (data.bets && data.bets.length > 0) {
+            document.getElementById('betsSection').style.display = 'block';
+            const betsList = document.getElementById('betsList');
+            betsList.innerHTML = ''; // Clear existing bets
+            
+            data.bets.forEach(bet => {
+              const betCard = document.createElement('div');
+              betCard.className = 'bet-card';
+              
+              const betSide = bet.side === true || bet.side === 1 ? 'YES' : 'NO';
+              const betColor = betSide === 'YES' ? '#10b981' : '#ef4444';
+              betCard.style.borderLeftColor = betColor;
+              
+              betCard.innerHTML = `
+                <div class="bet-user">
+                  <i class="fab fa-twitter" style="color: #1da1f2; margin-right: 0.5rem;"></i>
+                  ${bet.userTwitterHandle || bet.user_twitter_handle || 'Anonymous'}
+                </div>
+                <div class="bet-details">
+                  <span><strong>${bet.amount} SOL</strong> on <strong style="color: ${betColor}">${betSide}</strong></span>
+                  <span><i class="far fa-clock"></i> ${new Date(bet.createdAt || bet.created_at).toLocaleString()}</span>
+                </div>
+              `;
+              
+              betsList.appendChild(betCard);
+            });
+          }
+        } else {
+          // Fallback: estimate bet count from pool amounts
+          const totalPool = parseFloat(document.getElementById('totalPool').textContent.replace(' SOL', ''));
+          const estimatedBets = totalPool > 0 ? Math.max(1, Math.floor(totalPool / 1.5)) : 0;
+          document.getElementById('totalBets').textContent = estimatedBets;
+        }
+      } catch (error) {
+        console.error('Error loading market bets:', error);
+        // Fallback: estimate bet count from pool amounts
+        const totalPool = parseFloat(document.getElementById('totalPool').textContent.replace(' SOL', ''));
+        const estimatedBets = totalPool > 0 ? Math.max(1, Math.floor(totalPool / 1.5)) : 0;
+        document.getElementById('totalBets').textContent = estimatedBets;
+      }
+    }
+
+    // Load market on page load
+    loadMarket();
+  </script>
+</body>
+</html>

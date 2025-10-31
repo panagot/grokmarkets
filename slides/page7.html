@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Roadmap: From Testnet to Market Leader</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            color: white;
+        }
+        .milestone-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-left: 4px solid #FFB86B;
+            transition: transform 0.3s ease;
+        }
+        .milestone-card:hover {
+            transform: translateY(-5px);
+        }
+        .timeline-line {
+            height: 4px;
+            background: linear-gradient(90deg, #FFB86B, #FFF1E6);
+        }
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background-color: #FFB86B;
+            border: 3px solid white;
+        }
+        .icon-container {
+            background-color: #FFB86B;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .past {
+            opacity: 0.7;
+        }
+        .current {
+            border: 2px solid #ffaf7b;
+        }
+        .future {
+            opacity: 0.7;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide flex flex-col p-16" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-8">
+<h1 class="text-5xl font-bold mb-4">Roadmap: From Testnet to Market Leader</h1>
+<div class="w-32 h-1 bg-white"></div>
+</div>
+<!-- Timeline Visualization -->
+<div class="relative mb-12">
+<div class="timeline-line w-full absolute top-1/2 transform -translate-y-1/2"></div>
+<div class="flex justify-between relative">
+<!-- Q3 2025 -->
+<div class="flex flex-col items-center">
+<div class="timeline-dot current"></div>
+<p class="mt-2 font-semibold">Q3 2025</p>
+</div>
+<!-- Oct 2025 -->
+<div class="flex flex-col items-center">
+<div class="timeline-dot current"></div>
+<p class="mt-2 font-semibold">Oct 2025</p>
+</div>
+<!-- Q1 2026 -->
+<div class="flex flex-col items-center">
+<div class="timeline-dot future"></div>
+<p class="mt-2 font-semibold">Q1 2026</p>
+</div>
+<!-- Q2 2026 -->
+<div class="flex flex-col items-center">
+<div class="timeline-dot future"></div>
+<p class="mt-2 font-semibold">Q2 2026</p>
+</div>
+</div>
+</div>
+<!-- Milestones -->
+<div class="grid grid-cols-4 gap-6">
+<!-- Q3 2025 -->
+<div class="milestone-card p-6 rounded-lg flex flex-col">
+<div class="flex items-center mb-4">
+<div class="icon-container mr-4">
+<i class="fas fa-code text-xl text-white"></i>
+</div>
+<h2 class="text-xl font-bold">Concept to Code</h2>
+</div>
+<ul class="list-disc ml-6 space-y-2">
+<li>Develop @solpredictbot</li>
+<li>Integrate Grok API</li>
+<li>Automated resolution system</li>
+</ul>
+</div>
+<!-- Oct 2025 -->
+<div class="milestone-card p-6 rounded-lg flex flex-col">
+<div class="flex items-center mb-4">
+<div class="icon-container mr-4">
+<i class="fas fa-rocket text-xl text-white"></i>
+</div>
+<h2 class="text-xl font-bold">Testnet Launch</h2>
+</div>
+<ul class="list-disc ml-6 space-y-2">
+<li>Official testnet launch</li>
+<li>100+ active users</li>
+<li>Strategic partnerships</li>
+</ul>
+</div>
+<!-- Q1 2026 -->
+<div class="milestone-card p-6 rounded-lg flex flex-col">
+<div class="flex items-center mb-4">
+<div class="icon-container mr-4">
+<i class="fas fa-coins text-xl text-white"></i>
+</div>
+<h2 class="text-xl font-bold">Mainnet Goals</h2>
+</div>
+<ul class="list-disc ml-6 space-y-2">
+<li>1,000 daily markets</li>
+<li>$1M Total Value Locked</li>
+<li>Community airdrops</li>
+</ul>
+</div>
+<!-- Q2 2026 -->
+<div class="milestone-card p-6 rounded-lg flex flex-col">
+<div class="flex items-center mb-4">
+<div class="icon-container mr-4">
+<i class="fas fa-chart-line text-xl text-white"></i>
+</div>
+<h2 class="text-xl font-bold">Growth Phase</h2>
+</div>
+<ul class="list-disc ml-6 space-y-2">
+<li>Expand market offerings</li>
+<li>Enhanced analytics</li>
+<li>Strategic partnerships</li>
+</ul>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-8 text-sm text-gray-300 text-right">
+<p>GrokMarkets: The Future of Prediction Markets</p>
+</div>
+</div>
+<script>
+        // D3.js could be used here for more complex timeline visualizations if needed
+    </script>
+</body></html>

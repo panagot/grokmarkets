@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Integration - GrokMarkets Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+        }
+        body { font-family: 'Inter', sans-serif; background: #fff; color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .header { background: var(--primary-gradient); color: white; padding: 2rem 0; text-align: center; }
+        .header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .content { padding: 3rem 0; }
+        .section { background: white; border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+        .section h2 { font-size: 1.8rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+        .code-block { background: #f8f9fa; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; font-family: monospace; margin: 1rem 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #667eea; text-decoration: none; margin-bottom: 2rem; font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background: #f8f9fa; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fab fa-twitter"></i> Twitter Integration</h1>
+            <p>All @PANAGOT Commands & Interactions</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Documentation
+            </a>
+
+            <div class="section">
+                <h2><i class="fas fa-terminal"></i> Core Commands</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>create</code></td>
+                            <td>Create a new prediction market</td>
+                            <td><code>@PANAGOT create "Will BTC hit $100K?"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>yes/no [amount]</code></td>
+                            <td>Place a bet</td>
+                            <td><code>yes 2</code> or <code>no 1.5</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>deposit</code></td>
+                            <td>Get your Solana deposit address</td>
+                            <td><code>@PANAGOT deposit</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>balance</code></td>
+                            <td>Check your current balance</td>
+                            <td><code>@PANAGOT balance</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>withdraw</code></td>
+                            <td>Withdraw SOL to your wallet</td>
+                            <td><code>@PANAGOT withdraw 5 [address]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>help</code></td>
+                            <td>Get help and command list</td>
+                            <td><code>@PANAGOT help</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-magic"></i> Advanced Commands</h2>
+                <p>For power users and market creators:</p>
+                <ul>
+                    <li><code>@PANAGOT stats</code> - Your betting statistics</li>
+                    <li><code>@PANAGOT leaderboard</code> - Top winners</li>
+                    <li><code>@PANAGOT trending</code> - Popular markets</li>
+                    <li><code>@PANAGOT challenge @user "question"</code> - Challenge friends</li>
+                    <li><code>@PANAGOT share [market_id]</code> - Share a market</li>
+                    <li><code>@PANAGOT template crypto/stocks/sports</code> - Get templates</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-info-circle"></i> How @PANAGOT Works</h2>
+                <p><strong>@PANAGOT</strong> is our Twitter bot that handles all interactions. It:</p>
+                <ul>
+                    <li>✅ Polls Twitter mentions every 15 minutes</li>
+                    <li>✅ Monitors Solana deposits every 1 minute</li>
+                    <li>✅ Checks expired markets every 10 minutes</li>
+                    <li>✅ Resolves markets via Grok API (99% reliable, <1 second)</li>
+                    <li>✅ Posts resolutions publicly on Twitter</li>
+                    <li>✅ Pays winners automatically</li>
+                </ul>
+                <p style="margin-top: 1rem;">
+                    <strong>Fully automated 24/7!</strong> No manual intervention needed.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

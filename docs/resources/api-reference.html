@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference - GrokMarkets Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .content {
+            padding: 3rem 0;
+        }
+
+        .endpoint {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .method {
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .method.get { background: var(--info-color); color: white; }
+        .method.post { background: var(--success-color); color: white; }
+        .method.put { background: var(--warning-color); color: white; }
+        .method.delete { background: var(--error-color); color: white; }
+
+        .endpoint-url {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .endpoint h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .endpoint p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block .method { color: #4fc1ff; }
+        .code-block .url { color: #ce9178; }
+        .code-block .header { color: #9cdcfe; }
+        .code-block .json { color: #d4d4d4; }
+
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .param-table th,
+        .param-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .param-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .param-table td {
+            color: var(--text-secondary);
+        }
+
+        .param-name {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .required {
+            color: var(--error-color);
+            font-weight: 600;
+        }
+
+        .optional {
+            color: var(--text-secondary);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-gradient);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-code"></i> API Reference</h1>
+            <p>Complete API documentation for GrokMarkets</p>
+            <div style="background: rgba(29, 161, 242, 0.1); border: 1px solid rgba(29, 161, 242, 0.2); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                <strong>🐦 Important:</strong> GrokMarkets operates entirely through Twitter commands with @PANAGOT. These API endpoints are primarily for data retrieval and internal bot operations. All user interactions happen on Twitter.
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Documentation
+            </a>
+
+            <div class="toc">
+                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                <ul>
+                    <li><a href="#authentication">Authentication</a></li>
+                    <li><a href="#markets">Markets API</a></li>
+                    <li><a href="#bets">Bets API</a></li>
+                    <li><a href="#users">Users API</a></li>
+                    <li><a href="#transactions">Transactions API</a></li>
+                    <li><a href="#system">System API</a></li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 id="authentication">Authentication</h2>
+                <p>GrokMarkets operates through Twitter commands with @PANAGOT. The API endpoints are primarily for data retrieval and internal Twitter bot operations. No wallet authentication is required for public data endpoints.</p>
+            </div>
+
+            <div class="section">
+                <h2 id="markets">Markets API</h2>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-url">/api/markets</span>
+                    </div>
+                    <h3>Get All Markets</h3>
+                    <p>Retrieve all available prediction markets.</p>
+                    
+                    <div class="code-block">
+<span class="method">GET</span> <span class="url">/api/markets</span>
+
+<span class="header">Response:</span>
+<span class="json">[
+  {
+    "id": "market_123",
+    "question": "Will Bitcoin reach $100K by December 2025?",
+    "creator": "crypto_trader",
+    "totalYesAmount": 12.5,
+    "totalNoAmount": 8.3,
+    "resolved": false,
+    "endTime": "2025-12-31T23:59:59Z",
+    "createdAt": "2024-09-30T10:00:00Z"
+  }
+]</span>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-url">/api/markets</span>
+                    </div>
+                    <h3>Create Market (Twitter Integration)</h3>
+                    <p>Create a new prediction market via Twitter bot integration. This endpoint is used internally by @PANAGOT when processing Twitter commands.</p>
+                    
+                    <table class="param-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="param-name">question</span></td>
+                                <td>string</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>The prediction question</td>
+                            </tr>
+                            <tr>
+                                <td><span class="param-name">endTime</span></td>
+                                <td>string (ISO 8601)</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>Market end date and time</td>
+                            </tr>
+                            <tr>
+                                <td><span class="param-name">creatorFee</span></td>
+                                <td>number</td>
+                                <td><span class="optional">No</span></td>
+                                <td>Creator fee in basis points (default: 300)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block">
+<span class="method">POST</span> <span class="url">/api/markets</span>
+<span class="header">Content-Type: application/json</span>
+
+<span class="json">{
+  "question": "Will Tesla reach $500 by end of 2024?",
+  "endTime": "2024-12-31T23:59:59Z",
+  "creatorFee": 300
+}</span>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-url">/api/markets/:id</span>
+                    </div>
+                    <h3>Get Market Details</h3>
+                    <p>Retrieve detailed information about a specific market.</p>
+                    
+                    <div class="code-block">
+<span class="method">GET</span> <span class="url">/api/markets/market_123</span>
+
+<span class="header">Response:</span>
+<span class="json">{
+  "id": "market_123",
+  "question": "Will Bitcoin reach $100K by December 2025?",
+  "creator": "crypto_trader",
+  "totalYesAmount": 12.5,
+  "totalNoAmount": 8.3,
+  "resolved": false,
+  "outcome": null,
+  "endTime": "2025-12-31T23:59:59Z",
+  "createdAt": "2024-09-30T10:00:00Z",
+  "bets": [...],
+  "stats": {...}
+}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 id="bets">Bets API</h2>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-url">/api/bets</span>
+                    </div>
+                    <h3>Place Bet (Twitter Integration)</h3>
+                    <p>Place a bet on a prediction market via Twitter bot integration. This endpoint is used internally by @PANAGOT when processing betting replies.</p>
+                    
+                    <table class="param-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="param-name">marketId</span></td>
+                                <td>string</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>The market ID to bet on</td>
+                            </tr>
+                            <tr>
+                                <td><span class="param-name">amount</span></td>
+                                <td>number</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>Bet amount in SOL</td>
+                            </tr>
+                            <tr>
+                                <td><span class="param-name">isYes</span></td>
+                                <td>boolean</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>True for YES bet, false for NO bet</td>
+                            </tr>
+                            <tr>
+                                <td><span class="param-name">twitterHandle</span></td>
+                                <td>string</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>User's Twitter handle</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block">
+<span class="method">POST</span> <span class="url">/api/bets</span>
+<span class="header">Content-Type: application/json</span>
+
+<span class="json">{
+  "marketId": "market_123",
+  "amount": 1.5,
+  "isYes": true,
+  "twitterHandle": "crypto_trader"
+}</span>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-url">/api/markets/:id/bets</span>
+                    </div>
+                    <h3>Get Market Bets</h3>
+                    <p>Retrieve all bets for a specific market.</p>
+                    
+                    <div class="code-block">
+<span class="method">GET</span> <span class="url">/api/markets/market_123/bets</span>
+
+<span class="header">Response:</span>
+<span class="json">[
+  {
+    "id": "bet_456",
+    "marketId": "market_123",
+    "userTwitterHandle": "crypto_trader",
+    "side": "YES",
+    "amount": 1.5,
+    "odds": 0.581,
+    "potentialPayout": 2.58,
+    "createdAt": "2024-09-30T10:30:00Z"
+  }
+]</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 id="users">Users API</h2>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-url">/api/users/:handle/balance</span>
+                    </div>
+                    <h3>Get User Balance</h3>
+                    <p>Retrieve a user's current balance. Used internally by @PANAGOT when processing balance check commands.</p>
+                    
+                    <div class="code-block">
+<span class="method">GET</span> <span class="url">/api/users/crypto_trader/balance</span>
+
+<span class="header">Response:</span>
+<span class="json">{
+  "balance": 15.75,
+  "currency": "SOL"
+}</span>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-url">/api/users/:handle/transactions</span>
+                    </div>
+                    <h3>Get User Transactions</h3>
+                    <p>Retrieve a user's transaction history.</p>
+                    
+                    <div class="code-block">
+<span class="method">GET</span> <span class="url">/api/users/crypto_trader/transactions</span>
+
+<span class="header">Response:</span>
+<span class="json">[
+  {
+    "id": "tx_789",
+    "type": "bet",
+    "amount": 1.5,
+    "marketId": "market_123",
+    "createdAt": "2024-09-30T10:30:00Z",
+    "status": "confirmed"
+  }
+]</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 id="system">System API</h2>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-url">/api/health</span>
+                    </div>
+                    <h3>Health Check</h3>
+                    <p>Check the API health status and database connectivity.</p>
+                    
+                    <div class="code-block">
+<span class="method">GET</span> <span class="url">/api/health</span>
+
+<span class="header">Response:</span>
+<span class="json">{
+  "status": "ok",
+  "timestamp": "2025-01-10T10:00:00Z",
+  "message": "GrokMarkets API is running",
+  "database": {
+    "connected": true,
+    "status": "healthy"
+  }
+}</span>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-url">/api/stats</span>
+                    </div>
+                    <h3>Platform Statistics</h3>
+                    <p>Get overall platform statistics.</p>
+                    
+                    <div class="code-block">
+<span class="method">GET</span> <span class="url">/api/stats</span>
+
+<span class="header">Response:</span>
+<span class="json">{
+  "totalMarkets": 156,
+  "totalBets": 2847,
+  "totalVolume": 1250.75,
+  "activeUsers": 892,
+  "resolvedMarkets": 89
+}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Error Responses</h2>
+                <p>All API endpoints return consistent error responses:</p>
+                
+                <div class="code-block">
+<span class="json">{
+  "error": "Error message description",
+  "code": "ERROR_CODE",
+  "details": "Additional error details"
+}</span>
+                </div>
+
+                <p><strong>Common HTTP Status Codes:</strong></p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li><code>200</code> - Success</li>
+                    <li><code>400</code> - Bad Request</li>
+                    <li><code>401</code> - Unauthorized</li>
+                    <li><code>404</code> - Not Found</li>
+                    <li><code>500</code> - Internal Server Error</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

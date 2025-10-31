@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Competitive Analysis: Why We Win</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            color: white;
+        }
+        .comparison-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .comparison-table th {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .comparison-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .grokmarkets-row {
+            background-color: rgba(255, 184, 107, 0.25);
+        }
+        .advantage-icon {
+            color: #10B981;
+        }
+        .disadvantage-icon {
+            color: #EF4444;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide flex flex-col p-16" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-8">
+<h1 class="text-5xl font-bold mb-4">Competitive Analysis: Why We Win</h1>
+<div class="w-32 h-1 bg-white"></div>
+</div>
+<!-- Main Content: Comparison Table -->
+<div class="flex-1 flex flex-col">
+<table class="comparison-table w-full rounded-lg overflow-hidden">
+<thead>
+<tr>
+<th class="w-1/4">Feature</th>
+<th class="w-1/4">GrokMarkets</th>
+<th class="w-1/4">Polymarket</th>
+<th class="w-1/4">Kalshi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="grokmarkets-row">
+<td class="font-semibold">Twitter Creation</td>
+<td><i class="fas fa-check-circle advantage-icon mr-2"></i>Instant</td>
+<td><i class="fas fa-times-circle disadvantage-icon mr-2"></i>App-only</td>
+<td><i class="fas fa-times-circle disadvantage-icon mr-2"></i>Regulated UI</td>
+</tr>
+<tr>
+<td class="font-semibold">AI Resolution</td>
+<td><i class="fas fa-check-circle advantage-icon mr-2"></i>Grok</td>
+<td><i class="fas fa-times-circle disadvantage-icon mr-2"></i>Manual</td>
+<td><i class="fas fa-times-circle disadvantage-icon mr-2"></i>Oracles</td>
+</tr>
+<tr>
+<td class="font-semibold">Blockchain Speed</td>
+<td><i class="fas fa-check-circle advantage-icon mr-2"></i>1s Payouts</td>
+<td><i class="fas fa-times-circle disadvantage-icon mr-2"></i>Ethereum</td>
+<td><i class="fas fa-times-circle disadvantage-icon mr-2"></i>Centralized</td>
+</tr>
+<tr>
+<td class="font-semibold">Fee Structure</td>
+<td><i class="fas fa-check-circle advantage-icon mr-2"></i>1% Total</td>
+<td><i class="fas fa-check-circle disadvantage-icon mr-2"></i>2%</td>
+<td><i class="fas fa-times-circle disadvantage-icon mr-2"></i>5%+</td>
+</tr>
+</tbody>
+</table>
+<!-- Summary -->
+<div class="mt-8 bg-purple-900 bg-opacity-50 p-6 rounded-lg">
+<div class="flex items-center mb-4">
+<i class="fas fa-trophy text-3xl text-yellow-400 mr-4"></i>
+<h2 class="text-2xl font-bold">Why We Win</h2>
+</div>
+<ul class="grid grid-cols-3 gap-4">
+<li class="flex items-start">
+<i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+<span>Superior user experience</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+<span>AI-powered fairness</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+<span>Cost-effective operations</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-4 text-sm text-gray-300 text-right">
+<p>GrokMarkets: The Future of Prediction Markets</p>
+</div>
+</div>
+</body></html>

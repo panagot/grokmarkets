@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - GrokMarkets Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .content {
+            padding: 3rem 0;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .faq-question:hover {
+            color: #667eea;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            margin-left: 2.5rem;
+        }
+
+        .faq-answer ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .search-box {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8f9fa;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+        }
+
+        .category {
+            margin-bottom: 3rem;
+        }
+
+        .category h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .highlight {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip::before {
+            content: "💡 ";
+            font-size: 1.2rem;
+        }
+
+        .warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning::before {
+            content: "⚠️ ";
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-question-circle"></i> Frequently Asked Questions</h1>
+            <p>Find answers to common questions about GrokMarkets</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Documentation
+            </a>
+
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search FAQ..." id="searchInput">
+            </div>
+
+            <div class="category">
+                <h2><i class="fas fa-rocket"></i> Getting Started</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        What is GrokMarkets?
+                    </div>
+                    <div class="faq-answer">
+                        GrokMarkets is an AI-powered prediction market platform that operates entirely through Twitter. Users create markets, place bets, and interact via Twitter commands with @PANAGOT. The website only displays live market data. All transactions happen on Twitter and are secured by Solana blockchain.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fab fa-twitter"></i>
+                        Do I need to connect a wallet?
+                    </div>
+                    <div class="faq-answer">
+                        No wallet connection needed! GrokMarkets works entirely through Twitter. When you first deposit SOL or place a bet, a Solana address is automatically created and linked to your Twitter handle. You can withdraw to any Solana wallet later using <span class="highlight">@PANAGOT withdraw [amount]</span>.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-coins"></i>
+                        How much SOL do I need to start?
+                    </div>
+                    <div class="faq-answer">
+                        You can start with as little as 0.1 SOL. Most bets range from 0.1 to 10 SOL. You can deposit SOL to your Twitter-linked address or start betting directly via Twitter replies. Start small to get familiar with the platform before making larger bets.
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2><i class="fas fa-chart-line"></i> Markets & Betting</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-plus-circle"></i>
+                        How do I create a market?
+                    </div>
+                    <div class="faq-answer">
+                        Creating a market is easy - just tweet @PANAGOT:
+                        <ul>
+                            <li>Tweet <span class="highlight">@PANAGOT create "Your prediction question?"</span></li>
+                            <li>@PANAGOT will respond with market details and ID</li>
+                            <li>Others can bet by replying to your tweet</li>
+                            <li>View live data on GrokMarkets.com</li>
+                        </ul>
+                        <div class="tip">
+                            <strong>Tip:</strong> Good market questions are specific, have clear deadlines, and binary outcomes (Yes/No).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        How do I place a bet?
+                    </div>
+                    <div class="faq-answer">
+                        Betting is done entirely through Twitter replies:
+                        <ul>
+                            <li><strong>Find a market tweet</strong> from @PANAGOT</li>
+                            <li><strong>Reply with your bet:</strong> <span class="highlight">"yes 1"</span> or <span class="highlight">"no 2"</span> (amount in SOL)</li>
+                            <li><strong>@PANAGOT processes your bet</strong> and updates odds</li>
+                            <li><strong>View live data</strong> on GrokMarkets.com</li>
+                        </ul>
+                        <div class="tip">
+                            <strong>Note:</strong> The website only shows market data. All betting happens on Twitter.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-percentage"></i>
+                        How do odds work?
+                    </div>
+                    <div class="faq-answer">
+                        Odds represent the probability of an outcome. If YES has 60% odds, you have a 60% chance of winning. The payout is calculated as: <span class="highlight">Your Bet × (100 / Odds)</span>. So betting 1 SOL at 60% odds would pay ~1.67 SOL if you win.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-money-bill-wave"></i>
+                        When do I get my winnings?
+                    </div>
+                    <div class="faq-answer">
+                        Winnings are automatically credited to your Twitter-linked balance when Grok AI resolves the market. You can then withdraw them to any Solana wallet using <span class="highlight">@PANAGOT withdraw [amount]</span> on Twitter. The withdrawal will be sent to your specified wallet address.
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2><i class="fab fa-twitter"></i> Twitter Integration</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-robot"></i>
+                        What is @PANAGOT?
+                    </div>
+                    <div class="faq-answer">
+                        @PANAGOT is the GrokMarkets Twitter bot that handles ALL platform interactions. It processes market creation, betting, balance checks, and withdrawals directly through Twitter replies and mentions. This is the ONLY way to interact with GrokMarkets - the website is purely for viewing data.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-comments"></i>
+                        What Twitter commands can I use?
+                    </div>
+                    <div class="faq-answer">
+                        Here are ALL the Twitter commands you need:
+                        <div class="code-block">
+@PANAGOT create "Your prediction question?"
+yes 1.5    (bet 1.5 SOL on YES - reply to market tweet)
+no 2       (bet 2 SOL on NO - reply to market tweet)
+@PANAGOT balance
+@PANAGOT withdraw 1.5
+                        </div>
+                        <div class="tip">
+                            <strong>Important:</strong> These are the ONLY ways to interact with GrokMarkets. The website has no interactive features.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-link"></i>
+                        Do I need to connect my Twitter account?
+                    </div>
+                    <div class="faq-answer">
+                        No account connection needed! Just use the Twitter commands directly. The bot recognizes you by your Twitter handle (@username) and automatically creates a Solana address linked to it. Your first deposit or bet will establish this connection.
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2><i class="fas fa-brain"></i> Grok AI Resolution</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-cog"></i>
+                        How does Grok AI resolve markets?
+                    </div>
+                    <div class="faq-answer">
+                        Grok AI automatically analyzes market outcomes using real-time data and context. It considers multiple factors like news, events, data sources, and verifiable information to make objective determinations. The AI provides reasoning for its decisions.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-clock"></i>
+                        When are markets resolved?
+                    </div>
+                    <div class="faq-answer">
+                        Markets are resolved automatically when their end time is reached. Grok AI then analyzes the outcome and determines the winning side. This usually happens within minutes of the market's end time.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-gavel"></i>
+                        Can I dispute a resolution?
+                    </div>
+                    <div class="faq-answer">
+                        Resolutions by Grok AI are final and binding. The AI uses objective criteria and verifiable data sources. If you believe there's been an error, you can contact support, but resolutions are generally not reversible.
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2><i class="fas fa-shield-alt"></i> Security & Safety</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-lock"></i>
+                        Is my money safe?
+                    </div>
+                    <div class="faq-answer">
+                        Yes! GrokMarkets uses Solana smart contracts to secure all funds. Your money is held in escrow contracts until market resolution. We never have access to your private keys or funds.
+                        <div class="warning">
+                            <strong>Important:</strong> Never share your wallet's private keys or seed phrase with anyone. GrokMarkets will never ask for these.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-user-shield"></i>
+                        What if I lose my wallet?
+                    </div>
+                    <div class="faq-answer">
+                        If you lose access to your wallet, you'll also lose access to your GrokMarkets balance and any unresolved bets. Always backup your wallet's seed phrase in a secure location.
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2><i class="fas fa-life-ring"></i> Support</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-envelope"></i>
+                        How can I get help?
+                    </div>
+                    <div class="faq-answer">
+                        You can get help in several ways:
+                        <ul>
+                            <li>📧 Email support: support@grokmarkets.com</li>
+                            <li>💬 Discord: Join our community server</li>
+                            <li>🐦 Twitter: DM @PANAGOT for quick questions</li>
+                            <li>📚 Documentation: Check our guides and API docs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-bug"></i>
+                        How do I report a bug?
+                    </div>
+                    <div class="faq-answer">
+                        Found a bug? Please report it:
+                        <ul>
+                            <li>📧 Email: bugs@grokmarkets.com</li>
+                            <li>💬 Discord: Use the #bug-reports channel</li>
+                            <li>🐦 Twitter: Mention @PANAGOT with details</li>
+                        </ul>
+                        Include steps to reproduce, your wallet address, and any error messages.
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 12px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Still have questions?</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Can't find what you're looking for? Our support team is here to help.
+                </p>
+                <a href="../support/contact.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary-gradient); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                    <i class="fas fa-envelope"></i>
+                    Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple FAQ search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
