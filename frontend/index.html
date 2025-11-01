@@ -1412,7 +1412,7 @@
             font-size: 0.9rem;
         }
 
-        .twitter-avatar.panagot {
+        .twitter-avatar.solpredictbot {
             background: var(--primary-gradient);
         }
 
@@ -1775,7 +1775,7 @@
                 </h2>
                 <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.7rem;">
                     <div class="loading-spinner" style="width: 10px; height: 10px;"></div>
-                    <span id="twitterActivityStatus">Live updates from @PANAGOT</span>
+                    <span id="twitterActivityStatus">Live updates from @solpredictbot</span>
                 </div>
             </div>
             
@@ -1900,7 +1900,7 @@
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h4>Tweet to Create</h4>
-                            <p>Tweet @PANAGOT create "Your prediction?" to start a market</p>
+                            <p>Tweet @solpredictbot create "Your prediction?" to start a market</p>
                         </div>
                     </div>
                     <div class="step-item">
@@ -1950,7 +1950,7 @@
                             The future of decentralized prediction markets is here.
                         </p>
                         <div class="footer-social">
-                            <a href="https://twitter.com/PANAGOT" target="_blank" title="Follow @PANAGOT on Twitter">
+                            <a href="https://twitter.com/solpredictbot" target="_blank" title="Follow @solpredictbot on Twitter">
                                 <i class="fab fa-twitter"></i>
                             </a>
                             <a href="https://github.com/grokmarkets" target="_blank" title="View on GitHub">
@@ -2068,7 +2068,7 @@
             }
 
             // Format the question as a proper Twitter bot command
-            const twitterCommand = `@PANAGOT create ${question}`;
+            const twitterCommand = `@solpredictbot create ${question}`;
             
             // Calculate days until end
             const daysUntilEnd = Math.ceil((new Date(endTime) - new Date()) / (1000 * 60 * 60 * 24));
@@ -2078,7 +2078,7 @@
 
 Ends in ${daysUntilEnd} days!
 
-#PANAGOT #PredictionMarket`;
+#solpredictbot #PredictionMarket`;
             
             // URL encode the tweet text
             const encodedTweet = encodeURIComponent(tweetText);
