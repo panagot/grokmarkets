@@ -1019,7 +1019,8 @@
         // Update status badge
         const statusBadge = document.getElementById('statusBadge');
         if (market.resolved) {
-          statusBadge.textContent = `RESOLVED: ${market.outcome ? 'YES' : 'NO'}`;
+          const outcomeText = (market.outcome === 'YES' || market.outcome === true || market.outcome === 1) ? 'YES' : 'NO';
+          statusBadge.textContent = `OUTCOME: ${outcomeText}`;
           statusBadge.className = 'status-badge status-resolved';
         } else {
           statusBadge.textContent = 'ACTIVE';
