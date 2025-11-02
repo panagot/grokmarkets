@@ -163,6 +163,12 @@ no 2
 @solpredictbot help
 ```
 
+### **Manual Resolution** (Admin Only)
+```
+@solpredictbot resolve GM-ABC123 yes
+@solpredictbot resolve GM-ABC123 no
+```
+
 ---
 
 ## 🎨 **Advanced Features**
